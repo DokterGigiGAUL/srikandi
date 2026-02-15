@@ -160,7 +160,7 @@
                 </div>
 
                 <!-- Processing Status -->
-                <div id="processingStatus" class="hidden mt-6 text-center">
+                <div id="processingStatus" class="hidden my-6 text-center">
                     <div class="inline-flex items-center gap-3 bg-blue-50 px-6 py-4 rounded-xl">
                         <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-500"></div>
                         <div class="text-left">
@@ -195,22 +195,22 @@
                 </div>
 
                 <!-- Result Status Card -->
-                <div id="resultCard" class="rounded-2xl p-6 mb-4">
+                <div id="resultCard" class="rounded-2xl p-5 mb-4">
                     <div class="text-center">
-                        <p class="text-lg mb-2">
+                        <p class="text-lg mb-1">
                             <span class="font-bold">Status:</span> 
                             <span id="statusText" class="font-bold"></span>
                         </p>
                         <p class="text-lg">
-                            <span class="font-bold">Kepercayaan:</span> 
+                            <span class="font-bold">Persentase:</span> 
                             <span id="confidenceText" class="font-bold"></span>
                         </p>
                     </div>
                 </div>
 
                 <!-- Recommendation Card -->
-                <div class="bg-white rounded-2xl border border-gray-200 p-6 mb-4">
-                    <p id="recommendationText" class="text-gray-800 leading-relaxed"></p>
+                <div class="bg-white rounded-2xl border border-gray-200 p-5 mb-4">
+                    <p id="recommendationText" class="text-gray-800 leading-normal"></p>
                 </div>
 
                 <!-- New Analysis Button -->
@@ -324,7 +324,7 @@
                 resultCard.className = 'rounded-2xl p-6 mb-4 bg-red-500 text-white';
                 statusText.textContent = 'KANKER MULUT';
                 confidenceText.textContent = `${percentage}% (${getConfidenceLevel(result.confidence)})`;
-                recommendationText.textContent = 'Pastikan kondisi yang ada memiliki potensi keganasan. Berkonsultasi ke dokter gigi spesialis penyakit mulut atau dokter gigi terdekat.';
+                recommendationText.textContent = 'Segera jadwalkan konsultasi ke dokter gigi spesialis penyakit mulut atau dokter gigi terdekat untuk memastikan bahwa kondisi yang ada memang berpotensi keganasan';
             } else {
                 // NON KANKER MULUT
                 resultCard.className = 'rounded-2xl p-6 mb-4 bg-green-600 text-white';
