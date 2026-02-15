@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+*.egg-info/
+dist/
+build/
+
+# Model files (don't commit large models to git)
+*.h5
+*.pb
+*.ckpt
+*.weights
+
+# Dataset
+data/
+dataset/
+*.csv
+*.zip
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Only commit the final optimized model
+!oral_cancer_model.tflite
+!model_quantized.onnx
