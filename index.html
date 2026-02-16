@@ -95,6 +95,21 @@
                     </div>
                 </div>
 
+                
+
+                <!-- Upload Button -->
+                <div class="text-center">
+                    <p class="text-sm text-gray-400 mb-4">Kirim foto dengan klik tombol di bawah ini</p>
+                    <input type="file" id="fileInput" accept="image/*" class="hidden">
+                    <button onclick="document.getElementById('fileInput').click()" 
+                        class="w-full bg-sky-500 hover:bg-sky-600 active:bg-sky-700 text-white font-semibold py-4 px-5 rounded-xl transition-all duration-200 camera-button flex items-center justify-center gap-3 shadow-lg">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M4 5a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V7a2 2 0 00-2-2h-1.586a1 1 0 01-.707-.293l-1.121-1.121A2 2 0 0011.172 3H8.828a2 2 0 00-1.414.586L6.293 4.707A1 1 0 015.586 5H4zm6 9a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
+                        </svg>
+                        <span class="text-lg">Ambil/Upload Foto</span>
+                    </button>
+                </div>
+
                 <!-- Warning Card -->
                 <div class="bg-yellow-50 border border-yellow-100 rounded-2xl p-5 mb-6 fade-in">
                     <div class="flex items-start gap-3">
@@ -110,37 +125,11 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Upload Button -->
-                <div class="text-center">
-                    <p class="text-sm text-gray-400 mb-4">Kirim foto dengan klik tombol di bawah ini</p>
-                    <input type="file" id="fileInput" accept="image/*" class="hidden">
-                    <button onclick="document.getElementById('fileInput').click()" 
-                        class="w-full bg-sky-500 hover:bg-sky-600 active:bg-sky-700 text-white font-semibold py-4 px-5 rounded-xl transition-all duration-200 camera-button flex items-center justify-center gap-3 shadow-lg">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M4 5a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V7a2 2 0 00-2-2h-1.586a1 1 0 01-.707-.293l-1.121-1.121A2 2 0 0011.172 3H8.828a2 2 0 00-1.414.586L6.293 4.707A1 1 0 015.586 5H4zm6 9a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
-                        </svg>
-                        <span class="text-lg">Ambil/Upload Foto</span>
-                    </button>
-                </div>
             </div>
 
             <!-- Processing Screen -->
             <div id="processingScreen" class="hidden">
-                <!-- Warning Card (repeated) -->
-                <div class="bg-yellow-50 border border-yellow-100 rounded-2xl p-5 mb-6">
-                    <div class="flex items-start gap-3">
-                        <span class="text-2xl">⚠️</span>
-                        <div>
-                            <p class="font-bold text-gray-900 mb-2">PERHATIKAN:</p>
-                            <ul class="text-sm text-gray-800 space-y-1">
-                                <li>• Bot ini BUKAN penentu diagnosis medis</li>
-                                <li>• Hasil hanya untuk screening awal</li>
-                                <li>• Selalu konsultasi dengan profesional untuk diagnosis pasti</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                
 
                 <!-- Image Preview -->
                 <div class="mb-4">
@@ -168,10 +157,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Result Screen -->
-            <div id="resultScreen" class="hidden">
                 <!-- Warning Card (repeated) -->
                 <div class="bg-yellow-50 border border-yellow-100 rounded-2xl p-5 mb-6">
                     <div class="flex items-start gap-3">
@@ -186,6 +172,11 @@
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <!-- Result Screen -->
+            <div id="resultScreen" class="hidden">
+                
 
                 <!-- Result Image -->
                 <div class="mb-4">
@@ -211,6 +202,21 @@
                     <p id="recommendationText" class="text-gray-800 leading-normal"></p>
                 </div>
 
+                <!-- Warning Card (repeated) -->
+                <div class="bg-yellow-50 border border-yellow-100 rounded-2xl p-5 mb-6">
+                    <div class="flex items-start gap-3">
+                        <span class="text-2xl">⚠️</span>
+                        <div>
+                            <p class="font-bold text-gray-900 mb-2">PERHATIKAN:</p>
+                            <ul class="text-sm text-gray-800 space-y-1">
+                                <li>• Bot ini BUKAN penentu diagnosis medis</li>
+                                <li>• Hasil hanya untuk screening awal</li>
+                                <li>• Selalu konsultasi dengan profesional untuk diagnosis pasti</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
                 <!-- New Analysis Button -->
                 <button onclick="resetApp()" 
                     class="w-full bg-sky-500 hover:bg-sky-600 active:bg-sky-700 text-white font-semibold py-4 px-5 rounded-xl transition-all duration-200 camera-button flex items-center justify-center gap-3 shadow-lg">
