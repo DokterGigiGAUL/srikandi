@@ -230,7 +230,7 @@
 
     <script>
         // Configuration
-        const BACKEND_API_URL = 'https://oral-cancer-backend.vercel.app';
+        const BACKEND_API_URL = 'https://script.google.com/macros/s/AKfycbzUWjjMNL4ZbTlSFz9lRBe44qXtsXtLaZpab5PMvwQVpCo9SXiB75LnpGVnAtMMnYPenA/exec';
 
         // AI Model Simulator
         class OralCancerDetector {
@@ -349,29 +349,32 @@
         }
 
         async function uploadToCloud(imageData, predictionResult) {
-            try {
-                const response = await fetch(`${BACKEND_API_URL}/upload`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        image: imageData,
-                        prediction: {
-                            probability: predictionResult.probability,
-                            classification: predictionResult.isCancer ? 'Kanker' : 'Non-Kanker',
-                            confidence: predictionResult.confidence,
-                            severity: getConfidenceLevel(predictionResult.confidence)
-                        }
-                    })
-                });
+    try {
+        const formData = new FormData();
+        formData.append('file', imageData);
+        formData.append('filename', 'oral_cancer.jpg');
+        formData.append('mimeType', 'image/jpeg');
+        formData.append('timestamp', new Date().toISOString());
+        formData.append('age', '');
+        formData.append('gender', '');
+        formData.append('prediction', predictionResult ? 
+            `${(predictionResult.probability * 100).toFixed(2)}% - ${predictionResult.isCancer ? 'Kanker' : 'Non-Kanker'}` : 
+            'Unknown');
 
-                const result = await response.json();
-                console.log('Upload result:', result);
-            } catch (error) {
-                console.warn('Upload failed:', error);
-            }
-        }
+        const response = await fetch(BACKEND_API_URL, {
+            method: 'POST',
+            body: formData
+        });
+
+        const result = await response.json();
+        console.log('Upload result:', result);
+        
+        return result;
+    } catch (error) {
+        console.warn('Upload failed:', error);
+        return null;
+    }
+}
 
         function resetApp() {
             // Reset to welcome screen
