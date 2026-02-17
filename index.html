@@ -292,16 +292,17 @@
                 });
             }
 
-            async predict(imageElement) {
-                await new Promise(resolve => setTimeout(resolve, 2500));
-
-                const cancerProbability = Math.random();
-                const confidence = 0.6 + Math.random() * 0.35;
-
+            async predict(imageData) {
+                const response = await fetch('https://web-production-ad57e.up.railway.app/predict', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ image: imageData })
+                });
+                const data = await response.json();
                 return {
-                    probability: cancerProbability,
-                    confidence: confidence,
-                    isCancer: cancerProbability > 0.5
+                    probability: data.prediction_value,
+                    confidence: data.confidence / 100,
+                    isCancer: data.diagnosis === 'Cancer Detected'
                 };
             }
         }
@@ -343,7 +344,8 @@
                 }
 
                 // Run prediction
-                const result = await detector.predict(null);
+                const result = await detector.predict(currentImage);
+
                 
                 // Upload to cloud (optional)
                 await uploadToCloud(currentImage, result);
