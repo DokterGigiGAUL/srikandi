@@ -73,10 +73,10 @@
                 <!-- Welcome Card -->
                 <div class="bg-white rounded-2xl p-5 mb-4 fade-in border border-gray-100">
                     <h2 class="text-xl font-bold text-gray-900 mb-3">
-                        Selamat datang di Bot Kanker Mulut Gigital
+                        Selamat datang di Bot AI Evaluasi Resiko Kanker Mulut Gigital
                     </h2>
                     <p class="text-gray-700 leading-normal mb-4">
-                        Bot ini menggunakan AI untuk membantu mendeteksi potensi kanker mulut dari gambar.
+                        Bot menggunakan AI untuk mendeteksi kemungkinan kanker mulut dari gambar lesi.
                     </p>
                     
                     <!-- Instructions -->
@@ -112,7 +112,7 @@
                     <p class="text-sm text-gray-400 mb-4">Kirim foto dengan klik tombol di bawah ini</p>
                     <input type="file" id="fileInput" accept="image/*" class="hidden">
                     <button onclick="document.getElementById('fileInput').click()" 
-                        class="w-full bg-sky-500 hover:bg-sky-600 active:bg-sky-700 text-white font-semibold py-4 px-5 rounded-xl transition-all duration-200 camera-button flex items-center justify-center gap-3 shadow-lg">
+                        class="w-62% mx-auto bg-sky-500 hover:bg-sky-600 active:bg-sky-700 text-white font-semibold py-4 px-5 rounded-xl transition-all duration-200 camera-button flex items-center justify-center gap-3 shadow-lg">
                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M4 5a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V7a2 2 0 00-2-2h-1.586a1 1 0 01-.707-.293l-1.121-1.121A2 2 0 0011.172 3H8.828a2 2 0 00-1.414.586L6.293 4.707A1 1 0 015.586 5H4zm6 9a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
                         </svg>
@@ -139,9 +139,10 @@
                             <p class="font-bold text-gray-900 mb-2">PERHATIKAN:</p>
                             <ul class="text-sm text-gray-800 space-y-1">
                                 <li>• Bot ini BUKAN untuk pengganti diagnosis medis profesional</li>
-                                <li>• Hasil hanya untuk screening awal</li>
-                                <li>• Selalu konsultasi dengan dokter gigi untuk diagnosis pasti</li>
-                                <li>• Gunakan foto yang jelas dan terang</li>
+                                <li>• Hasil hanya untuk screening resiko awal</li>
+                                <li>• Selalu konsultasi dengan dokter gigi/ spesialis penyakit mulut untuk diagnosis medis akhir</li>
+                                <li>• Penilaian mungkin menampilkan hasil false negative/ false positive karena dalam proses training AI</li>
+                                <li>• Menggunakan foto yang jelas dan terang meningkatkan akurasi</li>
                             </ul>
                         </div>
                     </div>
@@ -160,7 +161,7 @@
                 <!-- Upload/Analyze Buttons -->
                 <div class="space-y-3">
                     <button onclick="document.getElementById('fileInput').click()" 
-                        class="w-full bg-sky-500 hover:bg-sky-600 active:bg-sky-700 text-white font-semibold py-4 px-6 rounded-xl transition-all duration-200 flex items-center justify-center gap-3">
+                        class="w-62% mx-auto bg-sky-500 hover:bg-sky-600 active:bg-sky-700 text-white font-semibold py-4 px-6 rounded-xl transition-all duration-200 flex items-center justify-center gap-3">
                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M4 5a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V7a2 2 0 00-2-2h-1.586a1 1 0 01-.707-.293l-1.121-1.121A2 2 0 0011.172 3H8.828a2 2 0 00-1.414.586L6.293 4.707A1 1 0 015.586 5H4zm6 9a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
                         </svg>
