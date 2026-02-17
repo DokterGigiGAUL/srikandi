@@ -8,7 +8,7 @@ import base64
 import os
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 MODEL_PATH = 'oral_cancer_model.tflite'
 IMG_SIZE = 224
@@ -77,7 +77,7 @@ def predict():
         prediction = predict_image(image_bytes)
         if prediction is None:
             return jsonify({'success': False, 'error': 'Prediction failed'}), 500
-        is_cancer = prediction < 0.5
+        is_cancer = prediction < 0.65
         confidence = (1 - prediction) if is_cancer else prediction
         if is_cancer:
             if confidence > 0.8:
