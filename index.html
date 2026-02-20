@@ -221,7 +221,7 @@
           <div class="space-y-3">
             <button
               onclick="document.getElementById('fileInput').click()"
-              class="w-62% mx-auto bg-sky-500 hover:bg-sky-600 active:bg-sky-700 text-white font-semibold py-4 px-6 rounded-xl transition-all duration-200 flex items-center justify-center gap-3"
+              class="w-62% bg-sky-500 hover:bg-sky-600 active:bg-sky-700 text-white font-semibold py-4 px-6 rounded-xl transition-all duration-200 flex items-center justify-center gap-3"
             >
               <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
                 <path
@@ -253,7 +253,7 @@
 
           <!-- Warning Card (repeated) -->
           <div
-            class="bg-yellow-100 border border-yellow-100 rounded-2xl p-6 mb-6"
+            class="bg-yellow-100 border border-yellow-100 rounded-xl md:rounded-2xl p-6 my-6"
           >
             <div class="flex items-start gap-2">
               <span class="">
@@ -306,10 +306,10 @@
           </div>
 
           <!-- Result Status Card -->
-          <div id="resultCard" class="rounded-2xl p-4 mb-4">
-            <div class="text-center">
+          <div id="resultCard" class="rounded-2xl py-4 px-6 mb-4">
+            <div class="text-left">
               <p class="text-lg mb-1">
-                <span class="font-bold">Status:</span>
+                <span class="font-bold">Stratifikasi Resiko:</span>
                 <span id="statusText" class="font-bold"></span>
               </p>
               <p class="text-md">
@@ -320,13 +320,13 @@
           </div>
 
           <!-- Recommendation Card -->
-          <div class="bg-white rounded-2xl border border-gray-200 p-5 mb-4">
+          <div class="bg-white rounded-2xl border-none border-gray-200 mb-4">
             <p id="recommendationText" class="text-gray-800 leading-normal"></p>
           </div>
 
           <!-- Warning Card (repeated) -->
           <div
-            class="bg-yellow-100 border border-yellow-100 rounded-2xl p-6 mb-6"
+            class="bg-yellow-100 border border-yellow-100 rounded-xl md:rounded-2xl p-6 mb-6"
           >
             <div class="flex items-start gap-2">
               <span class="">
