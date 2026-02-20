@@ -57,7 +57,7 @@
 
       <!-- Header with Logo -->
       <div
-        class="bg-white px-6 pt-6 backdrop-filter backdrop-blur-md bg-opacity-20 mb-0"
+        class="bg-white px-6 pt-4 backdrop-filter backdrop-blur-md bg-opacity-20"
       >
         <div class="flex items-center gap-2 border-b border-gray-300">
           <!-- QR Logo -->
@@ -126,14 +126,14 @@
           </div>
           
           <!-- Upload Button -->
-          <div class="text-center">
-          <div class="relative z-10 flex flex-col items-center">
+          <div class="">
+          <div class="relative z-10 flex flex-col items-left">
           <p class=" text-sm text-gray-400 mt-2 mb-2">
               Kirim foto dengan klik tombol di bawah ini
             </p>
             <input type="file" id="fileInput" accept="image/*" class="hidden" />
               <button onclick="document.getElementById('fileInput').click()"
-                class="hidden mb-6 text-white group relative flex items-center justify-center w-48 h-48 bg-gray-900 rounded-full shadow-lg transition-all duration-300 active:scale-95 hover:bg-sky-600 hover:scale-105 border-[6px] border-white/10 backdrop-blur-sm"
+                class="hidden mb-6 text-white group relative flex items-left justify-center w-48 h-48 bg-gray-900 rounded-full shadow-lg transition-all duration-300 active:scale-95 hover:bg-sky-600 hover:scale-105 border-[6px] border-white/10 backdrop-blur-sm"
               >
                 <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
                 <path
@@ -149,7 +149,7 @@
             <input type="file" id="fileInput" accept="image/*" class="hidden" />
             <button
               onclick="document.getElementById('fileInput').click()"
-              class="w-62% mx-auto bg-sky-500 hover:bg-sky-600 active:bg-sky-700 text-white font-semibold py-4 px-5 rounded-xl transition-all duration-200 camera-button flex items-center justify-center gap-3 shadow-lg"
+              class="w-62% bg-sky-500 hover:bg-sky-600 active:bg-sky-700 text-white font-semibold py-4 px-5 rounded-xl transition-all duration-200 camera-button flex items-center justify-center gap-3 shadow-lg"
             >
               <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
                 <path
