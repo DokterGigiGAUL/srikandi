@@ -4,7 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>OCRE - Oral Cancer Risk Evaluator</title>
-<link rel="icon" type="image/x-icon" href="https://doktergigigaul.github.io/ocre/Logo-gigital-2.png">
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="https://doktergigigaul.github.io/ocre/Logo-gigital-2.png"
+    />
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -50,14 +54,15 @@
     </style>
   </head>
 
-  <body class="bg-white min-h-screen">
-
+  <body class="bg-gray-200 min-h-screen">
     <!-- Main Container - Mobile First Design -->
     <!-- <div class="max-w-lg mx-auto bg-white min-h-screen shadow-lg"> -->
-<div class="max-w-lg mx-auto min-h-screen bg-[linear-gradient(to_right,rgba(255,255,255,0.95),rgba(255,255,255,0.95)),url('https://live.staticflickr.com/65535/55106247251_8807839f3b_b.jpg')] bg-cover bg-center">
+    <div
+      class="max-w-lg md:w-xl mx-auto min-h-screen bg-[linear-gradient(to_right,rgba(255,255,255,0.95),rgba(255,255,255,0.95)),url('https://live.staticflickr.com/65535/55106247251_8807839f3b_b.jpg')] bg-local bg-cover bg-center"
+    >
       <!-- Header with Logo -->
       <div
-        class="bg-none px-6 pt-4"
+        class="bg-white px-6 pt-4 backdrop-filter backdrop-blur-md bg-opacity-20"
       >
         <div class="flex items-center gap-2 border-none border-gray-300">
           <!-- QR Logo -->
@@ -67,9 +72,12 @@
             />
           </div>
           <div class="hidden leading-tight">
-                      <p class="text-xs md:text-sm text-gray-600 pb-0 md:pb-1">SRIKANDI</p>
-            <h1 class="text-2xl md:text-3xl font-extrabold text-gray-800">Stratifikasi Risiko Kanker Mulut Digital</h1>
-
+            <p class="text-xs md:text-sm text-gray-600 pb-0 md:pb-1">
+              SRIKANDI
+            </p>
+            <h1 class="text-2xl md:text-3xl font-extrabold text-gray-800">
+              Stratifikasi Risiko Kanker Mulut Digital
+            </h1>
           </div>
         </div>
       </div>
@@ -80,17 +88,19 @@
         <div id="welcomeScreen">
           <!-- Welcome Card -->
           <div class="rounded-xl md:rounded-2xl mb-4 fade-in">
-          <p
+            <p
               class="text-sm text-gray-600 leading-loose tracking-[0.2em] uppercase"
             >
               SRIKANDI
             </p>
-            <h2 class=" text-3xl font-extrabold text-gray-900 mb-3 leading-tight">
-              Skrining Risiko Kanker Mulut: Digital
+            <h2
+              class="text-3xl font-extrabold text-gray-900 mb-3 leading-tight"
+            >
+              Skrining Resiko Kanker Mulut Digital
             </h2>
             <p class="text-normal md:text-lg text-gray-700 mb-4 leading-normal">
-              Bot berbasis AI untuk penilaian resiko malignansi dari gambar
-              lesi rongga mulut.
+              Bot berbasis AI untuk penilaian resiko malignansi dari gambar lesi
+              rongga mulut.
             </p>
 
             <!-- Instructions -->
@@ -124,42 +134,53 @@
               </ol>
             </div>
           </div>
-          
+
           <!-- Upload Button -->
           <div class="">
-          <div class="relative z-10 flex flex-col items-left">
-          <p class=" text-sm text-gray-400 mt-2 mb-2">
-              Kirim foto dengan klik tombol di bawah ini
-            </p>
-            <input type="file" id="fileInput" accept="image/*" class="hidden" />
-              <button onclick="document.getElementById('fileInput').click()"
+            <div class="relative z-10 flex flex-col items-left">
+              <p class="text-sm text-gray-400 mt-2 mb-2">
+                Kirim foto dengan klik tombol di bawah ini
+              </p>
+              <input
+                type="file"
+                id="fileInput"
+                accept="image/*"
+                class="hidden"
+              />
+              <button
+                onclick="document.getElementById('fileInput').click()"
                 class="hidden mb-6 text-white group relative flex items-left justify-center w-48 h-48 bg-gray-900 rounded-full shadow-lg transition-all duration-300 active:scale-95 hover:bg-sky-600 hover:scale-105 border-[6px] border-white/10 backdrop-blur-sm"
               >
                 <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
-                <path
-                  fill-rule="evenodd"
-                  d="M4 5a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V7a2 2 0 00-2-2h-1.586a1 1 0 01-.707-.293l-1.121-1.121A2 2 0 0011.172 3H8.828a2 2 0 00-1.414.586L6.293 4.707A1 1 0 015.586 5H4zm6 9a3 3 0 100-6 3 3 0 000 6z"
-                  clip-rule="evenodd"
-                />
-              </svg>
+                  <path
+                    fill-rule="evenodd"
+                    d="M4 5a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V7a2 2 0 00-2-2h-1.586a1 1 0 01-.707-.293l-1.121-1.121A2 2 0 0011.172 3H8.828a2 2 0 00-1.414.586L6.293 4.707A1 1 0 015.586 5H4zm6 9a3 3 0 100-6 3 3 0 000 6z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
               </button>
             </div>
-            
+
             <div class="">
-            <input type="file" id="fileInput" accept="image/*" class="hidden" />
-            <button
-              onclick="document.getElementById('fileInput').click()"
-              class="w-62% bg-sky-500 hover:bg-sky-600 active:bg-sky-700 text-white font-semibold py-4 px-5 rounded-xl transition-all duration-200 camera-button flex items-center justify-center gap-3 shadow-lg"
-            >
-              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-                <path
-                  fill-rule="evenodd"
-                  d="M4 5a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V7a2 2 0 00-2-2h-1.586a1 1 0 01-.707-.293l-1.121-1.121A2 2 0 0011.172 3H8.828a2 2 0 00-1.414.586L6.293 4.707A1 1 0 015.586 5H4zm6 9a3 3 0 100-6 3 3 0 000 6z"
-                  clip-rule="evenodd"
-                />
-              </svg>
-              <span class="text-lg">Ambil/ Upload Foto</span>
-            </button>
+              <input
+                type="file"
+                id="fileInput"
+                accept="image/*"
+                class="hidden"
+              />
+              <button
+                onclick="document.getElementById('fileInput').click()"
+                class="w-62% bg-sky-500 hover:bg-sky-600 active:bg-sky-700 text-white font-semibold py-4 px-5 rounded-xl transition-all duration-200 camera-button flex items-center justify-center gap-3 shadow-lg"
+              >
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    fill-rule="evenodd"
+                    d="M4 5a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V7a2 2 0 00-2-2h-1.586a1 1 0 01-.707-.293l-1.121-1.121A2 2 0 0011.172 3H8.828a2 2 0 00-1.414.586L6.293 4.707A1 1 0 015.586 5H4zm6 9a3 3 0 100-6 3 3 0 000 6z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <span class="text-lg">Ambil/ Upload Foto</span>
+              </button>
             </div>
           </div>
 
@@ -309,7 +330,7 @@
           <div id="resultCard" class="rounded-2xl py-4 px-6 mb-4">
             <div class="text-left">
               <p class="text-md mb-1">
-                <span class="font-bold">Kemungkinan:</span>
+                <span class="font-bold">Stratifikasi Resiko:</span>
                 <span id="statusText" class="font-bold"></span>
               </p>
               <p class="text-md">
@@ -320,7 +341,7 @@
           </div>
 
           <!-- Recommendation Card -->
-          <div class="bg-none rounded-xl border-none border-gray-200 mb-4">
+          <div class="bg-white rounded-2xl border-none border-gray-200 mb-4">
             <p id="recommendationText" class="text-gray-800 leading-normal"></p>
           </div>
 
