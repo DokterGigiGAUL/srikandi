@@ -52,7 +52,15 @@
             transform: scale(0.95);
         }
 
-
+      /* ── Gambar hasil upload: selalu kotak, mengisi container ── */
+        .result-image {
+            display: block;
+            width: 100%;          /* ikut lebar container */
+            aspect-ratio: 1 / 1;  /* selalu kotak di semua ukuran layar */
+            object-fit: cover;    /* crop tengah, tidak gepeng */
+            border-radius: 1rem;
+        }
+      
       /* ── Marquee wrapper: clips overflow ── */
       .marquee-wrapper {
         overflow: hidden;
@@ -474,7 +482,7 @@
         <div id="processingScreen" class="hidden">
           <!-- Image Preview -->
           <div class="mb-4">
-            <img id="imagePreview" class="w-full rounded-2xl" alt="Preview" />
+            <img id="imagePreview" class="result-image" alt="Preview" />
           </div>
 
           <!-- Upload/Analyze Buttons -->
@@ -562,7 +570,7 @@
         <div id="resultScreen" class="hidden">
           <!-- Result Image -->
           <div class="mb-4">
-            <img id="resultImage" class="w-full rounded-2xl" alt="Result" />
+            <img id="resultImage" class="result-image" alt="Result" />
           </div>
 
           <!-- Result Status Card -->
