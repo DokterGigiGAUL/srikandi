@@ -21,35 +21,90 @@
     />
 
     <style>
-      body {
-          font-family: 'Inter', sans-serif;
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .qr-pattern {
+            background-image:
+                linear-gradient(45deg, #000 25%, transparent 25%),
+                linear-gradient(-45deg, #000 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #000 75%),
+                linear-gradient(-45deg, transparent 75%, #000 75%);
+            background-size: 4px 4px;
+            background-position: 0 0, 0 2px, 2px -2px, -2px 0px;
+        }
+
+        .animate-pulse-slow {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .camera-button:active {
+            transform: scale(0.95);
+        }
+
+
+      /* ── Marquee wrapper: clips overflow ── */
+      .marquee-wrapper {
+        overflow: hidden;
+        width: 100%;
+        padding: 8px 0;
       }
 
-      .qr-pattern {
-          background-image:
-              linear-gradient(45deg, #000 25%, transparent 25%),
-              linear-gradient(-45deg, #000 25%, transparent 25%),
-              linear-gradient(45deg, transparent 75%, #000 75%),
-              linear-gradient(-45deg, transparent 75%, #000 75%);
-          background-size: 4px 4px;
-          background-position: 0 0, 0 2px, 2px -2px, -2px 0px;
+      /* ── Inner track: flex row, animates continuously ── */
+      .marquee-track {
+        display: flex;
+        gap: 16px;
+        width: max-content;
+        animation: marquee-scroll 18s linear infinite;
       }
 
-      .animate-pulse-slow {
-          animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+      /* ── Pause on hover (desktop) ── */
+      .marquee-wrapper:hover .marquee-track,
+      .marquee-track.paused {
+        animation-play-state: paused;
       }
 
-      @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(10px); }
-          to { opacity: 1; transform: translateY(0); }
+      @keyframes marquee-scroll {
+        0%   { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+        /* -50% because track = 2× card set, so half = one full loop */
       }
 
-      .fade-in {
-          animation: fadeIn 0.5s ease-out;
+      /* ── Card hover lift ── */
+      .slide-card {
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+        flex-shrink: 0;
+      }
+      .slide-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 28px rgba(0,0,0,.18);
       }
 
-      .camera-button:active {
-          transform: scale(0.95);
+      /* ── Floating camera pulse ring ── */
+      @keyframes pulse-ring {
+        0%   { transform: scale(1);   opacity: .55; }
+        70%  { transform: scale(1.5); opacity: 0;   }
+        100% { transform: scale(1.5); opacity: 0;   }
+      }
+      .pulse-ring { position: relative; }
+      .pulse-ring::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: 9999px;
+        background: #2563eb;
+        animation: pulse-ring 2s ease-out infinite;
+        z-index: -1;
       }
     </style>
   </head>
@@ -61,9 +116,7 @@
       class="max-w-lg md:w-xl mx-auto min-h-screen bg-[linear-gradient(to_right,rgba(255,255,255,0.95),rgba(255,255,255,0.95)),url('https://live.staticflickr.com/65535/55106247251_8807839f3b_b.jpg')] bg-local bg-cover bg-center"
     >
       <!-- Header with Logo -->
-      <div
-        class="bg-none px-6 pt-4 "
-      >
+      <div class="bg-none px-6 pt-4">
         <div class="flex items-center gap-2 border-none border-gray-300">
           <!-- QR Logo -->
           <div class="w-12 h-auto rounded-lg">
@@ -102,6 +155,145 @@
               Bot berbasis AI untuk penilaian resiko malignansi dari gambar lesi
               rongga mulut.
             </p>
+
+            <!-- ════════════════════════════════
+       IMAGE SLIDER – CSS Marquee
+  ═══════════════════════════════════ -->
+            <section class="my-4">
+              <div class="marquee-wrapper">
+                <div class="marquee-track" id="marqueeTrack">
+                  <!-- ▸ Set 1 (original) -->
+                  <div
+                    class="slide-card w-44 rounded-2xl overflow-hidden shadow-md"
+                  >
+                    <img
+                      src="https://media.istockphoto.com/id/1448289724/id/foto/kelenjar-parotis-yang-terinfeksi-infeksi-bakteri-konsep-penyakit-kelenjar-ludah-gondong-kanker.jpg?s=612x612&w=0&k=20&c=d_kPXbi5O4YGFArXS0teEHCvOexdxCz0fVDVA9AbsLA="
+                      alt="Non Kanker"
+                      class="w-full h-36 object-cover"
+                    />
+                    <div class="bg-green-600 px-3 py-1.5">
+                      <p class="text-white font-bold text-xs tracking-wide">
+                        NON KANKER MULUT
+                      </p>
+                      <p class="text-green-100 text-xs">Persentase: 87,3%</p>
+                    </div>
+                  </div>
+
+                  <div
+                    class="slide-card w-44 rounded-2xl overflow-hidden shadow-md"
+                  >
+                    <img
+                      src="https://live.staticflickr.com/65535/55107498965_b7d5bfb960_n.jpg"
+                      alt="Kanker"
+                      class="w-full h-36 object-cover"
+                    />
+                    <div class="bg-red-600 px-3 py-1.5">
+                      <p class="text-white font-bold text-xs tracking-wide">
+                        KANKER MULUT
+                      </p>
+                      <p class="text-red-100 text-xs">Persentase: 97,3%</p>
+                    </div>
+                  </div>
+
+                  <div
+                    class="slide-card w-44 rounded-2xl overflow-hidden shadow-md"
+                  >
+                    <img
+                      src="https://live.staticflickr.com/65535/55107377074_a4ab41b2de_n.jpg"
+                      alt="Kanker"
+                      class="w-full h-36 object-cover"
+                    />
+                    <div class="bg-red-600 px-3 py-1.5">
+                      <p class="text-white font-bold text-xs tracking-wide">
+                        KANKER MULUT
+                      </p>
+                      <p class="text-red-100 text-xs">Persentase: 81,5%</p>
+                    </div>
+                  </div>
+
+                  <div
+                    class="slide-card w-44 rounded-2xl overflow-hidden shadow-md"
+                  >
+                    <img
+                      src="https://live.staticflickr.com/65535/55107380129_604eee8854_n.jpg"
+                      alt="Non Kanker"
+                      class="w-full h-36 object-cover"
+                    />
+                    <div class="bg-green-600 px-3 py-1.5">
+                      <p class="text-white font-bold text-xs tracking-wide">
+                        NON KANKER MULUT
+                      </p>
+                      <p class="text-green-100 text-xs">Persentase: 79,8%</p>
+                    </div>
+                  </div>
+
+                  <!-- ▸ Set 2 (duplicate — membuat loop seamless) -->
+                  <div
+                    class="slide-card w-44 rounded-2xl overflow-hidden shadow-md"
+                  >
+                    <img
+                      src="https://media.istockphoto.com/id/1448289724/id/foto/kelenjar-parotis-yang-terinfeksi-infeksi-bakteri-konsep-penyakit-kelenjar-ludah-gondong-kanker.jpg?s=612x612&w=0&k=20&c=d_kPXbi5O4YGFArXS0teEHCvOexdxCz0fVDVA9AbsLA="
+                      alt="Non Kanker"
+                      class="w-full h-36 object-cover"
+                    />
+                    <div class="bg-green-600 px-3 py-1.5">
+                      <p class="text-white font-bold text-xs tracking-wide">
+                        NON KANKER MULUT
+                      </p>
+                      <p class="text-green-100 text-xs">Persentase: 87,3%</p>
+                    </div>
+                  </div>
+
+                  <div
+                    class="slide-card w-44 rounded-2xl overflow-hidden shadow-md"
+                  >
+                    <img
+                      src="https://live.staticflickr.com/65535/55107498965_b7d5bfb960_n.jpg"
+                      alt="Kanker"
+                      class="w-full h-36 object-cover"
+                    />
+                    <div class="bg-red-600 px-3 py-1.5">
+                      <p class="text-white font-bold text-xs tracking-wide">
+                        KANKER MULUT
+                      </p>
+                      <p class="text-red-100 text-xs">Persentase: 97,3%</p>
+                    </div>
+                  </div>
+
+                  <div
+                    class="slide-card w-44 rounded-2xl overflow-hidden shadow-md"
+                  >
+                    <img
+                      src="https://live.staticflickr.com/65535/55107377074_a4ab41b2de_n.jpg"
+                      alt="Kanker"
+                      class="w-full h-36 object-cover"
+                    />
+                    <div class="bg-red-600 px-3 py-1.5">
+                      <p class="text-white font-bold text-xs tracking-wide">
+                        KANKER MULUT
+                      </p>
+                      <p class="text-red-100 text-xs">Persentase: 81,5%</p>
+                    </div>
+                  </div>
+
+                  <div
+                    class="slide-card w-44 rounded-2xl overflow-hidden shadow-md"
+                  >
+                    <img
+                      src="https://live.staticflickr.com/65535/55107380129_604eee8854_n.jpg"
+                      alt="Non Kanker"
+                      class="w-full h-36 object-cover"
+                    />
+                    <div class="bg-green-600 px-3 py-1.5">
+                      <p class="text-white font-bold text-xs tracking-wide">
+                        NON KANKER MULUT
+                      </p>
+                      <p class="text-green-100 text-xs">Persentase: 79,8%</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
 
             <!-- Instructions -->
             <div class="space-y-3">
@@ -162,6 +354,34 @@
             </div>
 
             <div class="">
+            <!-- ════════════════════════════════
+       				FLOATING CAMERA BUTTON
+  			   ═══════════════════════════════════ -->
+         <input
+                type="file"
+                id="fileInput"
+                accept="image/*"
+                class="hidden"
+              />
+              <button
+            id="cameraBtn" onclick="document.getElementById('fileInput').click()"
+            class="pulse-ring z-50 w-16 h-16 rounded-full bg-blue-600 text-white shadow-xl flex items-center justify-center transition-transform active:scale-90"
+          >
+            <svg
+              class="w-7 h-7 relative z-10"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
+              />
+              <circle cx="12" cy="13" r="3" stroke-linecap="round" />
+            </svg>
+          </button>
               <input
                 type="file"
                 id="fileInput"
@@ -170,7 +390,7 @@
               />
               <button
                 onclick="document.getElementById('fileInput').click()"
-                class="w-62% bg-sky-500 hover:bg-sky-600 active:bg-sky-700 text-white font-semibold py-4 px-5 rounded-xl transition-all duration-200 camera-button flex items-center justify-center gap-3 shadow-lg"
+                class="z-10 w-62% bg-sky-500 hover:bg-sky-600 active:bg-sky-700 text-white font-semibold py-4 px-5 rounded-xl transition-all duration-200 camera-button flex items-center justify-center gap-3 shadow-lg"
               >
                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
                   <path
@@ -576,6 +796,24 @@
 
               // Initialize
               detector.loadModel();
+    </script>
+
+    <!-- ════════════════════════════════
+       SLIDER JAVASCRIPT
+  ═══════════════════════════════════ -->
+    <script>
+      const track = document.getElementById('marqueeTrack');
+
+      // Pause on touch (mobile), resume after lift
+      track.addEventListener('touchstart', () => track.classList.add('paused'),    { passive: true });
+      track.addEventListener('touchend',   () => {
+        setTimeout(() => track.classList.remove('paused'), 900);
+      }, { passive: true });
+
+      // Camera button action
+      document.getElementById('cameraBtn').addEventListener('click', () => {
+        document.getElementById('inputFoto').click();
+      });
     </script>
   </body>
 </html>
