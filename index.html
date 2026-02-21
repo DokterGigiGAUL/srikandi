@@ -106,6 +106,25 @@
         animation: pulse-ring 2s ease-out infinite;
         z-index: -1;
       }
+      
+/* ── Pulse ring: tombol PILL (persegi panjang rounded) ── */
+    @keyframes pulse-ring-pill {
+      0%   { opacity: .55; transform: scale(1);    }
+      70%  { opacity: 0;   transform: scale(1.05); }
+      100% { opacity: 0;   transform: scale(1.05); }
+    }
+    .pulse-ring-pill { position: relative; z-index: 0; }
+    .pulse-ring-pill::before {
+      content: '';
+      position: absolute;
+      inset: -5px;
+      border-radius: 16px;
+      background: #2563eb;
+      animation: pulse-ring-pill 2s ease-out infinite;
+      z-index: -1;          /* selalu di belakang — tombol tidak akan hilang */
+      pointer-events: none;
+    }
+
     </style>
   </head>
 
@@ -329,7 +348,7 @@
 
           <!-- Upload Button -->
           <div class="">
-            <div class="relative z-10 flex flex-col items-left">
+            <div class="relative z-10 flex flex-col items-center mx-auto">
               <p class="text-sm text-gray-400 mt-2 mb-2">
                 Klik tombol berikut untuk mulai
               </p>
@@ -356,7 +375,7 @@
             <div class="">
             <!-- ════════════════════════════════
        				FLOATING CAMERA BUTTON
-  			   ═══════════════════════════════════ -->
+  			   ═══════════════════════════════════
          <input
                 type="file"
                 id="fileInput"
@@ -365,7 +384,7 @@
               />
               <button
             id="cameraBtn" onclick="document.getElementById('fileInput').click()"
-            class="pulse-ring z-50 w-16 h-16 rounded-full bg-blue-600 text-white shadow-xl flex items-center justify-center transition-transform active:scale-90"
+            class="pulse-ring z-50 w-16 h-16 rounded-full bg-blue-600 text-white shadow-xl flex items-center mx-auto justify-center transition-transform active:scale-90"
           >
             <svg
               class="w-7 h-7 relative z-10"
@@ -381,7 +400,7 @@
               />
               <circle cx="12" cy="13" r="3" stroke-linecap="round" />
             </svg>
-          </button>
+          </button> -->
               <input
                 type="file"
                 id="fileInput"
@@ -390,7 +409,7 @@
               />
               <button
                 onclick="document.getElementById('fileInput').click()"
-                class="z-10 w-62% bg-sky-500 hover:bg-sky-600 active:bg-sky-700 text-white font-semibold py-4 px-5 rounded-xl transition-all duration-200 camera-button flex items-center justify-center gap-3 shadow-lg"
+                class="pulse-ring-pill transition-transform active:scale-95 justify-center mx-auto z-10 w-62% bg-sky-500 hover:bg-sky-600 active:bg-sky-700 text-white font-semibold py-4 px-5 rounded-xl transition-all duration-200 camera-button flex items-center justify-center gap-3 shadow-lg"
               >
                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
                   <path
