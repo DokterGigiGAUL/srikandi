@@ -52,6 +52,15 @@
             transform: scale(0.95);
         }
 
+        /* ── Gambar hasil upload: selalu kotak, mengisi container ── */
+        .result-image {
+            display: block;
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: 1rem;
+        }
+
       /* ── Gambar hasil upload: selalu kotak, mengisi container ── */
         .result-image {
             display: block;
@@ -360,12 +369,6 @@
               <p class="text-sm text-gray-400 mb-2">
                 Klik tombol berikut untuk mulai
               </p>
-              <input
-                type="file"
-                id="fileInput"
-                accept="image/*"
-                class="hidden"
-              />
               <button
                 onclick="document.getElementById('fileInput').click()"
                 class="hidden mb-6 text-white group relative flex items-left justify-center w-48 h-48 bg-gray-900 rounded-full shadow-lg transition-all duration-300 active:scale-95 hover:bg-sky-600 hover:scale-105 border-[6px] border-white/10 backdrop-blur-sm"
@@ -409,12 +412,6 @@
               <circle cx="12" cy="13" r="3" stroke-linecap="round" />
             </svg>
           </button> -->
-              <input
-                type="file"
-                id="fileInput"
-                accept="image/*"
-                class="hidden"
-              />
               <button
                 onclick="document.getElementById('fileInput').click()"
                 class="pulse-ring-pill transition-transform active:scale-95 justify-center mx-auto z-10 w-62% bg-sky-500 hover:bg-sky-600 active:bg-sky-700 text-white font-semibold py-4 px-5 rounded-xl transition-all duration-200 camera-button flex items-center justify-center gap-3 shadow-lg"
@@ -503,9 +500,9 @@
           </div>
 
           <!-- Processing Status -->
-          <div id="processingStatus" class="hidden my-5 text-center">
+          <div id="processingStatus" class="hidden my-5 text-center justify-center mx-auto">
             <div
-              class="inline-flex items-left gap-4 px-6 py-4 rounded-xl w-full justify-center"
+              class="inline-flex items-left gap-4 px-6 py-4 rounded-xl w-full "
             >
               <div
                 class="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-500"
@@ -842,5 +839,8 @@
         document.getElementById('inputFoto').click();
       });
     </script>
+    <!-- Single file input, shared by all buttons -->
+    <input type="file" id="fileInput" accept="image/*" class="hidden" />
+
   </body>
 </html>
