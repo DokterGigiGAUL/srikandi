@@ -556,12 +556,12 @@
         <!-- Result Screen -->
         <div id="resultScreen" class="hidden">
           <!-- Result Image -->
-          <div class="mb-4">
+          <div class="z-9">
             <img id="resultImage" class="result-image" alt="Result" />
           </div>
 
           <!-- Result Status Card -->
-          <div id="resultCard" class="rounded-2xl py-4 px-6 mb-4">
+          <div id="resultCard" class="relative -mt-20 z-10">
             <div class="text-left">
               <p class="text-md mb-1">
                 <span class="font-bold">Probabilitas:</span>
@@ -745,13 +745,13 @@
 
                   if (isCancer) {
                       // KANKER MULUT
-                      resultCard.className = 'rounded-2xl p-6 mb-4 bg-red-500 text-white';
+                      resultCard.className = 'rounded-b-xl px-6 py-5 mb-4 bg-red-600 text-white';
                       statusText.textContent = 'KANKER MULUT';
                       confidenceText.textContent = `${percentage}% (${getConfidenceLevel(result.confidence)})`;
                       recommendationText.textContent = 'Segera jadwalkan konsultasi ke dokter gigi spesialis penyakit mulut atau dokter gigi terdekat untuk memastikan bahwa kondisi yang ada memang berpotensi keganasan';
                   } else {
                       // NON KANKER MULUT
-                      resultCard.className = 'rounded-2xl p-6 mb-4 bg-green-600 text-white';
+                      resultCard.className = 'rounded-b-xl px-6 py-5 mb-4 bg-green-600 text-white';
                       statusText.textContent = 'NON KANKER MULUT';
                       confidenceText.textContent = `${percentage}% (${getConfidenceLevel(result.confidence)})`;
                       recommendationText.textContent = 'Pastikan kondisi yang ada tidak berpotensi keganasan. Berkonsultasi ke dokter gigi spesialis penyakit mulut atau dokter gigi terdekat.';
