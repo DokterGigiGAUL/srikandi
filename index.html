@@ -72,40 +72,88 @@
       
       /* ── Marquee wrapper: clips overflow ── */
       .marquee-wrapper {
-        overflow: hidden;
-        width: 100%;
-        padding: 8px 0;
-      }
+      overflow: hidden;
+      width: 100%;
+      padding: 8px 0;
+      /* Fade kiri-kanan agar terlihat "mengalir" */
+      -webkit-mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        black 8%,
+        black 92%,
+        transparent 100%
+      );
+      mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        black 8%,
+        black 92%,
+        transparent 100%
+      );
+    }
 
-      /* ── Inner track: flex row, animates continuously ── */
-      .marquee-track {
-        display: flex;
-        gap: 16px;
-        width: max-content;
-        animation: marquee-scroll 18s linear infinite;
-      }
+     /* Track bergerak: 2× lebar konten asli untuk loop seamless */
+    .marquee-track {
+      display: flex;
+      gap: 14px;
+      width: max-content;
+      cursor: grab;
+      user-select: none;
+      animation: marquee-loop 22s linear infinite;
+      will-change: transform;
+    }
 
-      /* ── Pause on hover (desktop) ── */
-      .marquee-wrapper:hover .marquee-track,
-      .marquee-track.paused {
-        animation-play-state: paused;
-      }
+      .marquee-track:active { cursor: grabbing; }
+
+    /* Pause saat hover desktop atau class .paused */
+    .marquee-wrapper:hover .marquee-track,
+    .marquee-track.paused {
+      animation-play-state: paused;
+    }
 
       @keyframes marquee-scroll {
         0%   { transform: translateX(0); }
         100% { transform: translateX(-50%); }
         /* -50% because track = 2× card set, so half = one full loop */
       }
+    
+      /* Marquee: sembunyikan scrollbar, clips konten */
+    @keyframes marquee-loop {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+      /* -50% = satu set penuh, lalu teleport balik tanpa jeda */
+    }
+      /* Card individual */
+    .slide-card {
+      flex-shrink: 0;
+      width: 176px;           /* w-44 */
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+      pointer-events: none;   /* drag tidak aktifkan link di dalam card */
+    }
+      .slide-card img {
+      width: 100%;
+      height: 128px;          /* h-32 */
+      object-fit: cover;
+      display: block;
+      pointer-events: none;
+    }
 
-      /* ── Card hover lift ── */
-      .slide-card {
-        transition: transform 0.25s ease, box-shadow 0.25s ease;
-        flex-shrink: 0;
-      }
+    .slide-card .card-label {
+      padding: 6px 12px 8px;
+    }
+
+    /* Saat di-drag: matikan animasi, gerakkan via JS */
+    .marquee-track.dragging {
+      animation: none !important;
+    }
+      /*
       .slide-card:hover {
         transform: translateY(-4px);
         box-shadow: 0 12px 28px rgba(0,0,0,.18);
-      }
+      }*/
 
       /* ── Floating camera pulse ring ── */
       @keyframes pulse-ring {
@@ -141,8 +189,7 @@
       z-index: -1;          /* selalu di belakang — tombol tidak akan hilang */
       pointer-events: none;
     }
-
-    </style>
+  </style>
   </head>
 
   <body class="bg-gray-100">
@@ -200,157 +247,79 @@
             <!-- ════════════════════════════════
        IMAGE SLIDER – CSS Marquee
   ═══════════════════════════════════ -->
-            <section class="my-4 -mx-6">
-              <div class="marquee-wrapper">
-                <div class="marquee-track" id="marqueeTrack">
-                  <!-- ▸ Set 1 (original) -->
-                  <div>
-                    <div
-                    class="slide-card w-44 rounded-lg overflow-hidden"
-                  >
-                    <img
-                      src="https://media.istockphoto.com/id/1448289724/id/foto/kelenjar-parotis-yang-terinfeksi-infeksi-bakteri-konsep-penyakit-kelenjar-ludah-gondong-kanker.jpg?s=612x612&w=0&k=20&c=d_kPXbi5O4YGFArXS0teEHCvOexdxCz0fVDVA9AbsLA="
-                      alt="Non Kanker"
-                      class="w-full h-32 object-cover"
-                    />
-                    </div>
-                    <div class="slide-card w-44 rounded-lg overflow-hidden mt-2 bg-green-600 px-3 py-1.5">
-                      <p class="text-white font-bold text-xs tracking-wide">
-                        NON KANKER MULUT
-                      </p>
-                      <p class="text-green-100 text-xs">Persentase: 87,3%</p>
-                    </div>
-                  </div>
+            <section class="-mx-6 my-4">
+    <div class="marquee-wrapper" id="marqueeWrapper">
+      <div class="marquee-track" id="marqueeTrack">
 
-                  <div>
-                  <div
-                    class="slide-card w-44 rounded-lg overflow-hidden"
-                  >
-                    <img
-                      src="https://live.staticflickr.com/65535/55107498965_b7d5bfb960_n.jpg"
-                      alt="Kanker"
-                      class="w-full h-32 object-cover"
-                    />
-                  </div>
-                    <div class="slide-card w-44 rounded-lg overflow-hidden mt-2 bg-red-600 px-3 py-1.5">
-                      <p class="text-white font-bold text-xs tracking-wide">
-                        KANKER MULUT
-                      </p>
-                      <p class="text-red-100 text-xs">Persentase: 97,3%</p>
-                    </div>
-                  </div>
+        <!-- ▸ SET 1 – ganti src dengan URL foto asli kamu -->
+        <div class="slide-card">
+          <img src="https://media.istockphoto.com/id/1448289724/id/foto/kelenjar-parotis-yang-terinfeksi-infeksi-bakteri-konsep-penyakit-kelenjar-ludah-gondong-kanker.jpg?s=612x612&w=0&k=20&c=d_kPXbi5O4YGFArXS0teEHCvOexdxCz0fVDVA9AbsLA=" alt="Non Kanker" />
+          <div class="card-label bg-green-600">
+            <p class="text-white font-bold text-xs tracking-wide">NON KANKER MULUT</p>
+            <p class="text-green-100 text-xs">Persentase: 87,3%</p>
+          </div>
+        </div>
 
-                  <div>
-                    <div
-                    class="slide-card w-44 rounded-lg overflow-hidden"
-                  >
-                    <img
-                      src="https://live.staticflickr.com/65535/55107377074_a4ab41b2de_n.jpg"
-                      alt="Kanker"
-                      class="w-full h-32 object-cover"
-                    />
-                    </div>
-                    <div class="slide-card w-44 rounded-lg overflow-hidden mt-2 bg-red-600 px-3 py-1.5">
-                      <p class="text-white font-bold text-xs tracking-wide">
-                        KANKER MULUT
-                      </p>
-                      <p class="text-red-100 text-xs">Persentase: 81,5%</p>
-                    </div>
-                  </div>
+        <div class="slide-card">
+          <img src="https://live.staticflickr.com/65535/55107498965_b7d5bfb960_n.jpg" alt="Kanker" />
+          <div class="card-label bg-red-600">
+            <p class="text-white font-bold text-xs tracking-wide">KANKER MULUT</p>
+            <p class="text-red-100 text-xs">Persentase: 97,3%</p>
+          </div>
+        </div>
 
-                  <div>
-                    <div
-                    class="slide-card w-44 rounded-lg overflow-hidden"
-                  >
-                    <img
-                      src="https://live.staticflickr.com/65535/55107380129_604eee8854_n.jpg"
-                      alt="Non Kanker"
-                      class="w-full h-32 object-cover"
-                    />
-                    </div>
-                      <div class="slide-card w-44 rounded-lg overflow-hidden mt-2 bg-green-600 px-3 py-1.5">
-                      <p class="text-white font-bold text-xs tracking-wide">
-                        NON KANKER MULUT
-                      </p>
-                      <p class="text-green-100 text-xs">Persentase: 79,8%</p>
-                    </div>
-                  </div>
+        <div class="slide-card">
+          <img src="https://live.staticflickr.com/65535/55107377074_a4ab41b2de_n.jpg" alt="Kanker" />
+          <div class="card-label bg-red-600">
+            <p class="text-white font-bold text-xs tracking-wide">KANKER MULUT</p>
+            <p class="text-red-100 text-xs">Persentase: 81,5%</p>
+          </div>
+        </div>
 
-                  <!-- ▸ Set 2 (duplicate — membuat loop seamless) -->
-                  <div>
-                    <div
-                    class="slide-card w-44 rounded-lg overflow-hidden"
-                  >
-                    <img
-                      src="https://media.istockphoto.com/id/1448289724/id/foto/kelenjar-parotis-yang-terinfeksi-infeksi-bakteri-konsep-penyakit-kelenjar-ludah-gondong-kanker.jpg?s=612x612&w=0&k=20&c=d_kPXbi5O4YGFArXS0teEHCvOexdxCz0fVDVA9AbsLA="
-                      alt="Non Kanker"
-                      class="w-full h-32 object-cover"
-                    />
-                    </div>
-                      <div class="slide-card w-44 rounded-lg overflow-hidden mt-2 bg-green-600 px-3 py-1.5">
-                      <p class="text-white font-bold text-xs tracking-wide">
-                        NON KANKER MULUT
-                      </p>
-                      <p class="text-green-100 text-xs">Persentase: 87,3%</p>
-                    </div>
-                  </div>
+        <div class="slide-card">
+          <img src="https://live.staticflickr.com/65535/55107380129_604eee8854_n.jpg" alt="Non Kanker" />
+          <div class="card-label bg-green-600">
+            <p class="text-white font-bold text-xs tracking-wide">NON KANKER MULUT</p>
+            <p class="text-green-100 text-xs">Persentase: 79,8%</p>
+          </div>
+        </div>
 
-                  <div>
-                    <div
-                    class="slide-card w-44 rounded-lg overflow-hidden"
-                  >
-                    <img
-                      src="https://live.staticflickr.com/65535/55107498965_b7d5bfb960_n.jpg"
-                      alt="Kanker"
-                      class="w-full h-32 object-cover"
-                    />
-                    </div>
-                      <div class="slide-card w-44 rounded-lg overflow-hidden mt-2 bg-red-600 px-3 py-1.5">
-                      <p class="text-white font-bold text-xs tracking-wide">
-                        KANKER MULUT
-                      </p>
-                      <p class="text-red-100 text-xs">Persentase: 97,3%</p>
-                    </div>
-                  </div>
+        <!-- ▸ SET 2 – duplikat identik untuk loop seamless -->
+        <div class="slide-card">
+          <img src="https://media.istockphoto.com/id/1448289724/id/foto/kelenjar-parotis-yang-terinfeksi-infeksi-bakteri-konsep-penyakit-kelenjar-ludah-gondong-kanker.jpg?s=612x612&w=0&k=20&c=d_kPXbi5O4YGFArXS0teEHCvOexdxCz0fVDVA9AbsLA=" alt="Non Kanker" />
+          <div class="card-label bg-green-600">
+            <p class="text-white font-bold text-xs tracking-wide">NON KANKER MULUT</p>
+            <p class="text-green-100 text-xs">Persentase: 87,3%</p>
+          </div>
+        </div>
 
-                  <div>
-                    <div
-                    class="slide-card w-44 rounded-lg overflow-hidden"
-                  >
-                    <img
-                      src="https://live.staticflickr.com/65535/55107377074_a4ab41b2de_n.jpg"
-                      alt="Kanker"
-                      class="w-full h-32 object-cover"
-                    />
-                    </div>
-                      <div class="slide-card w-44 rounded-lg overflow-hidden mt-2 bg-red-600 px-3 py-1.5">
-                      <p class="text-white font-bold text-xs tracking-wide">
-                        KANKER MULUT
-                      </p>
-                      <p class="text-red-100 text-xs">Persentase: 81,5%</p>
-                    </div>
-                  </div>
+        <div class="slide-card">
+          <img src="https://live.staticflickr.com/65535/55107498965_b7d5bfb960_n.jpg" alt="Kanker" />
+          <div class="card-label bg-red-600">
+            <p class="text-white font-bold text-xs tracking-wide">KANKER MULUT</p>
+            <p class="text-red-100 text-xs">Persentase: 97,3%</p>
+          </div>
+        </div>
 
-                  <div>
-                    <div
-                    class="slide-card w-44 rounded-lg overflow-hidden"
-                  >
-                    <img
-                      src="https://live.staticflickr.com/65535/55107380129_604eee8854_n.jpg"
-                      alt="Non Kanker"
-                      class="w-full h-32 object-cover"
-                    />
-                    </div>
-                      <div class="slide-card w-44 rounded-lg overflow-hidden mt-2 bg-green-600 px-3 py-1.5">
-                      <p class="text-white font-bold text-xs tracking-wide">
-                        NON KANKER MULUT
-                      </p>
-                      <p class="text-green-100 text-xs">Persentase: 79,8%</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
+        <div class="slide-card">
+          <img src="https://live.staticflickr.com/65535/55107377074_a4ab41b2de_n.jpg" alt="Kanker" />
+          <div class="card-label bg-red-600">
+            <p class="text-white font-bold text-xs tracking-wide">KANKER MULUT</p>
+            <p class="text-red-100 text-xs">Persentase: 81,5%</p>
+          </div>
+        </div>
+
+        <div class="slide-card">
+          <img src="https://live.staticflickr.com/65535/55107380129_604eee8854_n.jpg" alt="Non Kanker" />
+          <div class="card-label bg-green-600">
+            <p class="text-white font-bold text-xs tracking-wide">NON KANKER MULUT</p>
+            <p class="text-green-100 text-xs">Persentase: 79,8%</p>
+          </div>
+        </div>
+
+      </div><!-- /marquee-track -->
+    </div><!-- /marquee-wrapper -->
+  </section>
 
             <!-- Instructions -->
             <div class="space-y-3">
@@ -849,18 +818,101 @@
        SLIDER JAVASCRIPT
   ═══════════════════════════════════ -->
     <script>
-      const track = document.getElementById('marqueeTrack');
-
-      // Pause on touch (mobile), resume after lift
-      track.addEventListener('touchstart', () => track.classList.add('paused'),    { passive: true });
-      track.addEventListener('touchend',   () => {
-        setTimeout(() => track.classList.remove('paused'), 900);
-      }, { passive: true });
 
       // Camera button action
       document.getElementById('cameraBtn').addEventListener('click', () => {
         document.getElementById('inputFoto').click();
       });
     </script>
+
+    <script>
+    (function () {
+      const wrapper = document.getElementById('marqueeWrapper');
+      const track   = document.getElementById('marqueeTrack');
+
+      // ── State ──────────────────────────────────────────
+      let isDragging   = false;
+      let startX       = 0;       // posisi pointer saat mulai drag
+      let dragOffset   = 0;       // seberapa jauh sudah di-drag
+      let pausedAt     = 0;       // nilai translateX saat drag dimulai
+
+      // ── Ambil translateX saat ini dari computed style ──
+      function getCurrentX() {
+        const style = window.getComputedStyle(track);
+        const matrix = new DOMMatrix(style.transform);
+        return matrix.m41; // translateX
+      }
+
+      // ── DRAG: Mouse ────────────────────────────────────
+      wrapper.addEventListener('mousedown', (e) => {
+        isDragging  = true;
+        startX      = e.clientX;
+        pausedAt    = getCurrentX();
+        track.classList.add('dragging', 'paused');
+        track.style.transform = `translateX(${pausedAt}px)`;
+      });
+
+      window.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        dragOffset = e.clientX - startX;
+        track.style.transform = `translateX(${pausedAt + dragOffset}px)`;
+      });
+
+      window.addEventListener('mouseup', () => {
+        if (!isDragging) return;
+        isDragging = false;
+        resumeFromPosition(pausedAt + dragOffset);
+      });
+
+      // ── DRAG: Touch ────────────────────────────────────
+      wrapper.addEventListener('touchstart', (e) => {
+        startX   = e.touches[0].clientX;
+        pausedAt = getCurrentX();
+        track.classList.add('dragging', 'paused');
+        track.style.transform = `translateX(${pausedAt}px)`;
+      }, { passive: true });
+
+      wrapper.addEventListener('touchmove', (e) => {
+        dragOffset = e.touches[0].clientX - startX;
+        track.style.transform = `translateX(${pausedAt + dragOffset}px)`;
+      }, { passive: true });
+
+      wrapper.addEventListener('touchend', () => {
+        resumeFromPosition(pausedAt + dragOffset);
+      });
+
+      // ── Resume animasi dari posisi drag berhenti ───────
+      // Caranya: set animation-delay negatif agar animasi
+      // "seolah sudah berjalan" dari titik yang tepat.
+      function resumeFromPosition(currentX) {
+        track.classList.remove('dragging');
+
+        // Hitung total lebar satu set (50% dari track)
+        const totalWidth = track.scrollWidth / 2;
+
+        // Normalisasi posisi agar selalu dalam satu siklus penuh
+        let normalized = ((currentX % totalWidth) - totalWidth) % totalWidth;
+        if (normalized > 0) normalized -= totalWidth;
+
+        // Durasi animasi dalam ms
+        const duration = 22000;
+
+        // Seberapa jauh progress (0–1) berdasarkan posisi
+        const progress = Math.abs(normalized) / totalWidth;
+        const delay    = -(progress * duration);
+
+        // Reset transform dan aktifkan kembali animasi dari delay yang tepat
+        track.style.transform   = '';
+        track.style.animationDelay    = `${delay}ms`;
+        track.style.animationDuration = `${duration}ms`;
+
+        // Hapus class paused setelah satu frame
+        requestAnimationFrame(() => {
+          track.classList.remove('paused');
+        });
+      }
+
+    })();
+  </script>
   </body>
 </html>
