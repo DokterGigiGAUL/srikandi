@@ -573,50 +573,38 @@
           </button>
           
           <!-- Warning Card (repeated) -->
-          <div
-            class="bg-yellow-100 border border-yellow-100 rounded-xl md:rounded-2xl p-4 mb-6 list-inside"
-          >
-            <div class="flex items-start gap-2">
-              <span class="">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  width="12"
-                  height="24"
-                >
-                  <path
-                    d="M12 2L1 21h22L12 2z"
-                    fill="#FFD700"
-                    stroke="black"
-                    stroke-width="2"
-                  />
-                  <path d="M11 7h2v7h-2zM11 17h2v2h-2z" fill="black" />
-                </svg>
-              </span>
-              <div>
-                <p class="font-bold text-gray-900 mb-2">DISCLAIMER:</p>
-              </div>
+          </button> </div>
             </div>
-            <ul class="text-sm text-gray-800 space-y-1 list-disc pl-4">
-              <li>
-                Hasil hanya untuk screening resiko awal, BUKAN pengganti
-                diagnosis medis dokter gigi profesional
-              </li>
-              <li>
-                Selalu konsultasi dengan dokter gigi spesialis penyakit mulut
-                untuk diagnosis medis akhir
-              </li>
-              <li>
-                Penilaian mungkin menampilkan hasil
-                <i>false negative/ false positive</i> karena AI masih dalam proses
-                training
-              </li>
-              <li>
-                Hanya untuk digunakan oleh tenaga medis profesional yang
-                kompeten
-              </li>
-            </ul>
-          </div>
+                        <ul class="text-sm text-gray-800 space-y-1 list-disc pl-4">
+  <li>
+    Hasil hanya untuk screening resiko awal, BUKAN pengganti
+    diagnosis medis dokter gigi profesional
+  </li>
+</ul>
+
+<!-- Konten tersembunyi -->
+<ul id="disclaimerExtra1" class="hidden text-sm text-gray-800 space-y-1 list-disc pl-4 mt-1">
+  <li>
+    Selalu konsultasi dengan dokter gigi spesialis penyakit mulut
+    untuk diagnosis medis akhir
+  </li>
+  <li>
+    Penilaian mungkin menampilkan hasil
+    <i>false negative/ false positive</i> karena AI masih dalam proses
+    training
+  </li>
+  <li>
+    Hanya untuk digunakan oleh tenaga medis profesional yang
+    kompeten
+  </li>
+</ul>
+<button
+  onclick="toggleDisclaimer('disclaimerExtra1', this)"
+  class="mt-2 text-sm text-yellow-700 font-semibold  hover:text-yellow-900 transition-colors"
+>
+  Selengkapnya ↓
+</button>
+ </div>
 
           
         </div>
