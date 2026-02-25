@@ -907,6 +907,13 @@
       }
 
     })();
+      
+    function toggleDisclaimer(id, btn) {
+  const el = document.getElementById(id);
+  const isHidden = el.classList.contains('hidden');
+  el.classList.toggle('hidden', !isHidden);
+  btn.textContent = isHidden ? 'Sembunyikan ↑' : 'Selengkapnya...';
+}  
   </script>
   </body>
 </html>
