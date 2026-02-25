@@ -466,17 +466,17 @@
           <!-- Upload/Analyze Buttons -->
           <div class="space-y-3">
             <button
-              onclick="document.getElementById('fileInput').click()"
+              onclick=""
               class="w-62% bg-sky-500 hover:bg-sky-600 active:bg-sky-700 text-white font-semibold py-4 px-6 rounded-xl transition-all duration-200 flex items-center justify-center mx-auto gap-3"
             >
-              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-                <path
-                  fill-rule="evenodd"
-                  d="M4 5a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V7a2 2 0 00-2-2h-1.586a1 1 0 01-.707-.293l-1.121-1.121A2 2 0 0011.172 3H8.828a2 2 0 00-1.414.586L6.293 4.707A1 1 0 015.586 5H4zm6 9a3 3 0 100-6 3 3 0 000 6z"
-                  clip-rule="evenodd"
-                />
-              </svg>
-              Ambil/ Upload Foto
+              <div
+              class="inline-flex items-left gap-4 px-6 py-4 rounded-xl w-full "
+            >
+              <div
+                class="animate-spin rounded-full h-10 w-10"
+              ></div>
+              Menganalisa Foto
+            </div>
             </button>
           </div>
 
@@ -486,10 +486,10 @@
               class="inline-flex items-left gap-4 px-6 py-4 rounded-xl w-full "
             >
               <div
-                class="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-500"
+                class="animate-spin rounded-full h-10 w-10"
               ></div>
               <div class="text-left">
-                <p class="font-semibold text-gray-900">Menganalisa gambar...</p>
+                <p class="hidden font-semibold text-gray-900">Menganalisa gambar...</p>
                 <p class="text-sm text-gray-600">
                   Harap menunggu sebentar. Terimakasih.
                 </p>
