@@ -315,7 +315,7 @@
                       recommendationText.textContent = 'Penilaian mungkin menampilkan hasil false negative/ false positive karena AI masih dalam proses training. Segera jadwalkan konsultasi ke dokter gigi spesialis penyakit mulut atau dokter gigi terdekat untuk memastikan bahwa kondisi yang ada memang berpotensi keganasan';
                   } else {
                       // NON KANKER MULUT
-                      resultCard.className = 'relative -mt-28 z-10 rounded-b-xl px-6 py-6 mb-4 bg-green-600 text-white';
+                      resultCard.className = 'relative -mt-28 z-10 rounded-b-xl px-6 py-6 mb-4 bg-green-700 text-white';
                       statusText.textContent = 'NON KANKER MULUT';
                       confidenceText.textContent = `${percentage}% (${getConfidenceLevel(result.confidence)})`;
                       recommendationText.textContent = 'Penilaian mungkin menampilkan hasil false negative/ false positive karena AI masih dalam proses training. Pastikan kondisi yang ada tidak berpotensi keganasan. Berkonsultasi ke dokter gigi spesialis penyakit mulut atau dokter gigi terdekat.';
