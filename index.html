@@ -70,9 +70,6 @@
 
           <!-- Upload Button -->
           <div class="relative z-10 flex flex-col items-center mx-auto">
-            <p class="text-sm text-gray-400 mb-2">
-              Klik tombol berikut untuk mulai
-            </p>
             <button onclick="document.getElementById('fileInput').click()"
               class="pulse-ring-pill transition-transform active:scale-95 justify-center mx-auto z-10 w-62% bg-sky-500 hover:bg-sky-600 active:bg-sky-700 text-white font-semibold py-4 px-5 rounded-xl transition-all duration-200 camera-button flex items-center justify-center gap-3 shadow-lg"
             >
@@ -81,6 +78,9 @@
             </svg>
             <span class="text-lg">Ambil/ Upload Foto</span>
             </button>
+            <p class="text-sm text-gray-400 mb-2">
+              Klik tombol di atas untuk memulai
+            </p>
           </div>
             
           <!-- Warning Card -->
@@ -99,7 +99,6 @@
               <ul class="text-sm text-gray-800 space-y-1 list-disc pl-4">
                 <li>Hasil hanya untuk screening resiko awal, BUKAN pengganti diagnosis medis dokter gigi profesional</li>
                 <li>Selalu konsultasi dengan dokter gigi spesialis penyakit mulut untuk diagnosis medis akhir</li>
-                <li>Penilaian mungkin menampilkan hasil <i>false negative/ false positive</i> karena AI masih dalam proses training</li>
                 <li>Hanya untuk digunakan oleh tenaga medis profesional yang kompeten</li>
               </ul>
           </div>
@@ -138,20 +137,10 @@
           </div>
         </div>
         <ul class="text-sm text-gray-800 space-y-1 list-disc pl-4">
-          <li>Hasil hanya untuk screening resiko awal, BUKAN pengganti diagnosis medis dokter gigi profesional</li>  
-        </ul>
-        <!-- Konten tersembunyi -->
-        <ul id="disclaimerExtra2" class="hidden text-sm text-gray-800 space-y-1 list-disc pl-4 mt-1">
-          <li>Selalu konsultasi dengan dokter gigi spesialis penyakit mulut untuk diagnosis medis akhir</li>
-          <li>Penilaian mungkin menampilkan hasil <i>false negative/ false positive</i> karena AI masih dalam proses training</li>
-          <li>Hanya untuk digunakan oleh tenaga medis profesional yang kompeten</li>
-        </ul>
-        <button
-          onclick="toggleDisclaimer('disclaimerExtra2', this)"
-          class="mt-2 text-sm text-yellow-700 font-semibold  hover:text-yellow-900 transition-colors"
-        >
-          Selengkapnya ↓
-        </button>
+                <li>Hasil hanya untuk screening resiko awal, BUKAN pengganti diagnosis medis dokter gigi profesional</li>
+                <li>Selalu konsultasi dengan dokter gigi spesialis penyakit mulut untuk diagnosis medis akhir</li>
+                <li>Hanya untuk digunakan oleh tenaga medis profesional yang kompeten</li>
+              </ul>
       </div>
         </div>
         <!-- Result Screen -->
@@ -182,7 +171,7 @@
           </div>
           
           <!-- New Analysis Button -->
-          <button onclick="resetApp()" class="mb-4 w-full bg-sky-500 hover:bg-sky-600 active:bg-sky-700 text-white font-semibold p-6 rounded-xl transition-all duration-200 camera-button flex items-center justify-center gap-3 shadow-lg">
+          <button onclick="resetApp()" class="class="w-full mb-4 w-full bg-sky-500 hover:bg-sky-600 text-white font-semibold p-5 rounded-xl transition-all duration-200 camera-button flex items-center justify-center mx-auto gap-3">
             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M4 5a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V7a2 2 0 00-2-2h-1.586a1 1 0 01-.707-.293l-1.121-1.121A2 2 0 0011.172 3H8.828a2 2 0 00-1.414.586L6.293 4.707A1 1 0 015.586 5H4zm6 9a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" />
             </svg>
@@ -208,7 +197,6 @@
           <!-- Konten tersembunyi -->
           <ul id="disclaimerExtra3" class="hidden text-sm text-gray-800 space-y-1 list-disc pl-4 mt-1">
             <li>Selalu konsultasi dengan dokter gigi spesialis penyakit mulut untuk diagnosis medis akhir</li>
-            <li>Penilaian mungkin menampilkan hasil <i>false negative/ false positive</i> karena AI masih dalam proses training</li>
             <li>Hanya untuk digunakan oleh tenaga medis profesional yang kompeten</li>
           </ul>
           <button
@@ -324,13 +312,13 @@
                       resultCard.className = 'relative -mt-28 z-10 rounded-b-xl px-6 py-6 mb-4 bg-red-600 text-white';
                       statusText.textContent = 'KANKER MULUT';
                       confidenceText.textContent = `${percentage}% (${getConfidenceLevel(result.confidence)})`;
-                      recommendationText.textContent = 'Segera jadwalkan konsultasi ke dokter gigi spesialis penyakit mulut atau dokter gigi terdekat untuk memastikan bahwa kondisi yang ada memang berpotensi keganasan';
+                      recommendationText.textContent = 'Penilaian mungkin menampilkan hasil false negative/ false positive karena AI masih dalam proses training. Segera jadwalkan konsultasi ke dokter gigi spesialis penyakit mulut atau dokter gigi terdekat untuk memastikan bahwa kondisi yang ada memang berpotensi keganasan';
                   } else {
                       // NON KANKER MULUT
                       resultCard.className = 'relative -mt-28 z-10 rounded-b-xl px-6 py-6 mb-4 bg-green-600 text-white';
                       statusText.textContent = 'NON KANKER MULUT';
                       confidenceText.textContent = `${percentage}% (${getConfidenceLevel(result.confidence)})`;
-                      recommendationText.textContent = 'Pastikan kondisi yang ada tidak berpotensi keganasan. Berkonsultasi ke dokter gigi spesialis penyakit mulut atau dokter gigi terdekat.';
+                      recommendationText.textContent = 'Penilaian mungkin menampilkan hasil false negative/ false positive karena AI masih dalam proses training. Pastikan kondisi yang ada tidak berpotensi keganasan. Berkonsultasi ke dokter gigi spesialis penyakit mulut atau dokter gigi terdekat.';
                   }
 
                   // Scroll to top
