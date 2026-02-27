@@ -167,7 +167,7 @@ body {
   position: absolute;
   inset: -5px;
   border-radius: 16px;
-  background: #2563eb;
+  background: #171717;
   animation: pulse-ring-pill 2s ease-out infinite;
   z-index: -1;
   pointer-events: none;
