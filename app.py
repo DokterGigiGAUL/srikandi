@@ -67,43 +67,51 @@ def predict():
     try:
         if interpreter is None:
             return jsonify({'success': False, 'error': 'Model not loaded'}), 500
+
         data = request.get_json()
         if not data or 'image' not in data:
             return jsonify({'success': False, 'error': 'No image provided'}), 400
+
         image_data = data['image']
         if ',' in image_data:
             image_data = image_data.split(',')[1]
+
         image_bytes = base64.b64decode(image_data)
         prediction = predict_image(image_bytes)
+
         if prediction is None:
             return jsonify({'success': False, 'error': 'Prediction failed'}), 500
+
         prob_non_cancer = prediction
         prob_cancer = 1 - prediction
-        
-        # Zona threshold konservatif
+
+        # =========================
+        # Threshold konservatif
+        # =========================
         if prob_cancer >= 0.8:
             is_cancer = True
             confidence = prob_cancer
-    
-        if confidence >= 0.9:
-            recommendation = "⚠️ Suspek kanker mulut dengan tingkat kepercayaan AI sangat tinggi. Konsultasi ke dokter gigi spesialis penyakit mulut, SEGERA!"
-        else:
-            recommendation = "⚠️ Terdeteksi kemungkinan lesi kanker mulut. Disarankan untuk konsultasi ke dokter gigi umum/ spesialis penyakit mulut."
-    
+
+            if confidence >= 0.9:
+                recommendation = "⚠️ Suspek kanker mulut dengan tingkat kepercayaan AI sangat tinggi. Konsultasi ke dokter gigi spesialis penyakit mulut, SEGERA!"
+            else:
+                recommendation = "⚠️ Terdeteksi kemungkinan kanker mulut. Disarankan untuk konsultasi ke dokter gigi umum / spesialis penyakit mulut."
+
         elif prob_cancer <= 0.4:
             is_cancer = False
             confidence = prob_non_cancer
-    
-        if confidence >= 0.8:
-            recommendation = "✅ Kondisi mulut terlihat normal. Tetap jaga kesehatan mulut dengan rutin."
+
+            if confidence >= 0.8:
+                recommendation = "✅ Kondisi mulut terlihat normal. Tetap jaga kesehatan mulut dengan rutin."
+            else:
+                recommendation = "✅ Kondisi mulut terlihat normal, namun tetap disarankan pemeriksaan untuk memastikan keamanan."
+
         else:
-            recommendation = "✅ Kondisi mulut terlihat normal, namun tetap disarankan pemeriksaan untuk memastikan keamanan."
-    
-        else:
-        # Zona abu-abu 40–80% → default tampil sebagai NON kanker
-        is_cancer = False
-        confidence = prob_non_cancer
-        recommendation = "ℹ️ Hasil berada pada zona borderline. Disarankan evaluasi klinis langsung  untuk memastikan kondisi lesi."
+            # Zona abu-abu 40–80% → default tampil sebagai NON kanker
+            is_cancer = False
+            confidence = prob_non_cancer
+            recommendation = "ℹ️ Hasil berada pada zona borderline. Disarankan evaluasi klinis langsung untuk memastikan kondisi lesi."
+
         return jsonify({
             'success': True,
             'prediction_value': float(prediction),
@@ -117,9 +125,11 @@ def predict():
                 'specificity': 99.67
             }
         }), 200
+
     except Exception as e:
         print(f"Error: {e}")
         return jsonify({'success': False, 'error': str(e)}), 500
+
 
 print("Starting Oral Cancer Detection API...")
 initialize_model()
