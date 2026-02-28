@@ -77,7 +77,7 @@ def predict():
         prediction = predict_image(image_bytes)
         if prediction is None:
             return jsonify({'success': False, 'error': 'Prediction failed'}), 500
-        is_cancer = prediction < 0.65
+        is_cancer = prediction < 0.5
         confidence = (1 - prediction) if is_cancer else prediction
         if is_cancer:
             if confidence > 0.8:
@@ -97,9 +97,9 @@ def predict():
             'risk_level': 'High' if is_cancer else 'Low',
             'recommendation': recommendation,
             'model_info': {
-                'accuracy': 85.71,
-                'sensitivity': 84.35,
-                'specificity': 86.92
+                'accuracy': 99.40,
+                'sensitivity': 67.32,
+                'specificity': 99.67
             }
         }), 200
     except Exception as e:
