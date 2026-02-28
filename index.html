@@ -169,7 +169,7 @@
           </div>
           
           <!-- New Analysis Button -->
-          <button onclick="resetApp()" class="w-full mb-4 w-full bg-sky-500 hover:bg-sky-600 text-white font-semibold p-5 rounded-xl transition-all duration-200 camera-button flex items-center justify-center mx-auto gap-3">
+          <button onclick="resetApp()" class="w-full mb-4 w-full bg-sky-600 hover:bg-sky-700 text-white font-semibold p-5 rounded-xl transition-all duration-200 camera-button flex items-center justify-center mx-auto gap-3">
             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M4 5a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V7a2 2 0 00-2-2h-1.586a1 1 0 01-.707-.293l-1.121-1.121A2 2 0 0011.172 3H8.828a2 2 0 00-1.414.586L6.293 4.707A1 1 0 015.586 5H4zm6 9a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" />
             </svg>
@@ -245,14 +245,8 @@
               });
 
               async function handleImageUpload(file) {
-                  if (file.size > 5 * 1024 * 1024) {
-                      alert('Ukuran file terlalu besar! Maksimal 5MB');
-                      return;
-                  }
-
-                  const reader = new FileReader();
-                  reader.onload = async (e) => {
-                      currentImage = e.target.result;
+                      const compressedBase64 = await compressImage(file);
+                      currentImage = compressedBase64;
 
                       // Show processing screen
                       document.getElementById('welcomeScreen').classList.add('hidden');
@@ -349,6 +343,36 @@
           }
       }
 
+      function compressImage(file) {
+    return new Promise((resolve) => {
+
+        const img = new Image();
+        const reader = new FileReader();
+
+        reader.onload = (e) => {
+            img.src = e.target.result;
+        };
+
+        img.onload = () => {
+            const canvas = document.createElement('canvas');
+
+            const MAX_WIDTH = 512;
+            const scaleSize = MAX_WIDTH / img.width;
+
+            canvas.width = MAX_WIDTH;
+            canvas.height = img.height * scaleSize;
+
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+            const compressedBase64 = canvas.toDataURL('image/jpeg', 0.7);
+            resolve(compressedBase64);
+        };
+
+        reader.readAsDataURL(file);
+    });
+}
+      
               function resetApp() {
                   // Reset to welcome screen
                   document.getElementById('resultScreen').classList.add('hidden');
