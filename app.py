@@ -88,7 +88,7 @@ def predict():
         if confidence >= 0.9:
             recommendation = "⚠️ Suspek kanker mulut dengan tingkat kepercayaan AI sangat tinggi. Konsultasi ke dokter gigi spesialis penyakit mulut, SEGERA!"
         else:
-            recommendation = "⚠️ Terdeteksi kemungkinan kanker mulut. Disarankan untuk konsultasi ke dokter gigi umum/ spesialis penyakit mulut."
+            recommendation = "⚠️ Terdeteksi kemungkinan lesi kanker mulut. Disarankan untuk konsultasi ke dokter gigi umum/ spesialis penyakit mulut."
     
         elif prob_cancer <= 0.4:
             is_cancer = False
