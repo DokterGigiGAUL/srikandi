@@ -77,18 +77,26 @@ def predict():
         prediction = predict_image(image_bytes)
         if prediction is None:
             return jsonify({'success': False, 'error': 'Prediction failed'}), 500
-        is_cancer = prediction < 0.5
-        confidence = (1 - prediction) if is_cancer else prediction
-        if is_cancer:
-            if confidence > 0.8:
-                recommendation = "⚠️ Terdeteksi indikasi kanker mulut dengan tingkat kepercayaan tinggi. SEGERA konsultasi ke dokter spesialis!"
+        prob_non_cancer = prediction
+        prob_cancer = 1 - prediction
+        
+        # Zona threshold konservatif
+        if prob_cancer >= 0.8:
+            is_cancer = True
+            confidence = prob_cancer
+            recommendation = "⚠️ Terdeteksi indikasi kanker mulut dengan tingkat kepercayaan AI tinggi. Konsultasi ke dokter spesialis SEGERA!"
             else:
                 recommendation = "⚠️ Terdeteksi kemungkinan kanker mulut. Disarankan untuk konsultasi ke dokter."
-        else:
-            if confidence > 0.8:
-                recommendation = "✅ Kondisi mulut terlihat normal. Tetap jaga kesehatan mulut dengan rutin."
+        elif prob_cancer <= 0.4:
+            is_cancer = False
+            confidence = prob_non_cancer
+            recommendation = "✅ Kondisi mulut terlihat normal. Tetap jaga kesehatan mulut dengan rutin."
             else:
                 recommendation = "✅ Kondisi mulut terlihat normal, namun tetap disarankan pemeriksaan rutin."
+        else:
+            # Zona abu-abu 40–80% → default tampil sebagai NON kanker
+            is_cancer = False
+            confidence = prob_non_cancer
         return jsonify({
             'success': True,
             'prediction_value': float(prediction),
