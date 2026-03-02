@@ -14,7 +14,7 @@
   </head>
 
   <body class="bg-gray-100">
-    <input type="file" id="fileInput" accept="image/*" class="hidden" />
+    <input type="file" id="fileInput" accept="image/*" capture="environment" class="hidden" />
     <div class="max-w-lg md:w-xl mx-auto min-h-screen bg-[linear-gradient(to_bottom,rgba(255,255,255,0.95),rgba(255,255,255,0.98)),url('https://live.staticflickr.com/65535/55111931235_97bf050cce_c.jpg')] bg-local bg-cover bg-center">
       <!-- Header with Logo -->
       <div class="flex items-center mx-auto justify-center bg-none mx-6 py-3 border-b border-gray-300">
@@ -181,7 +181,8 @@
 
 <script>
   const BACKEND_API_URL = 'https://script.google.com/macros/s/AKfycbzUWjjMNL4ZbTlSFz9lRBe44qXtsXtLaZpab5PMvwQVpCo9SXiB75LnpGVnAtMMnYPenA/exec';
-
+  const MAX_FILE_SIZE_MB = 10;
+  
   class OralCancerDetector {
     constructor() {
       this.modelLoaded = false;
@@ -224,21 +225,28 @@
 
   // ✅ DIPERBAIKI: Tidak ada lagi sisa kode lama (reader.readAsDataURL) di sini
   async function handleImageUpload(file) {
-    const compressedBase64 = await compressImage(file);
-    currentImage = compressedBase64;
+    // Validasi ukuran maksimal 10MB
+    const fileSizeMB = file.size / (1024 * 1024);
+    if (fileSizeMB > MAX_FILE_SIZE_MB) {
+        alert(`Ukuran file terlalu besar (${fileSizeMB.toFixed(1)} MB).\nMaksimal ${MAX_FILE_SIZE_MB} MB.`);
+        document.getElementById('fileInput').value = '';
+        return;
+    }
+
+    // Baca gambar TANPA kompresi
+    const base64 = await readFileAsBase64(file);
+    currentImage = base64;
 
     document.getElementById('welcomeScreen').classList.add('hidden');
     document.getElementById('processingScreen').classList.remove('hidden');
     document.getElementById('imagePreview').src = currentImage;
 
-    if (!detector.modelLoaded) {
-      await detector.loadModel();
-    }
+    if (!detector.modelLoaded) await detector.loadModel();
 
     const result = await detector.predict(currentImage);
     await uploadToCloud(currentImage, result);
     displayResults(result);
-  }
+}
 
   function displayResults(result) {
     const percentage = (result.confidence * 100).toFixed(2);
@@ -297,34 +305,17 @@
   }
 
   // ✅ DIPERBAIKI: reader.readAsDataURL(file) ada di dalam fungsi ini (bukan di luar)
-  function compressImage(file) {
-    return new Promise((resolve) => {
-      const img = new Image();
-      const reader = new FileReader();
+  // HAPUS seluruh fungsi compressImage() yang lama
+// GANTI dengan fungsi sederhana ini:
 
-      reader.onload = (e) => {
-        img.src = e.target.result;
-      };
-
-      img.onload = () => {
-        const canvas = document.createElement('canvas');
-        const MAX_WIDTH = 512;
-        const scaleSize = MAX_WIDTH / img.width;
-
-        canvas.width = MAX_WIDTH;
-        canvas.height = img.height * scaleSize;
-
-        const ctx = canvas.getContext('2d');
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-
-        const compressedBase64 = canvas.toDataURL('image/jpeg', 0.7);
-        resolve(compressedBase64);
-      };
-
-      // ✅ Ini tempatnya yang benar — di dalam compressImage, bukan di handleImageUpload
-      reader.readAsDataURL(file);
+function readFileAsBase64(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = (e) => resolve(e.target.result);
+        reader.onerror = () => reject(new Error('Gagal membaca file'));
+        reader.readAsDataURL(file); // langsung baca, tanpa canvas/resize
     });
-  }
+}
 
   function resetApp() {
     document.getElementById('resultScreen').classList.add('hidden');
