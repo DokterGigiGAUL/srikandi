@@ -23,14 +23,12 @@
           <img src="https://doktergigigaul.github.io/ocre/Logo-gigital-2.png" /></a>
         </div>
       </div>
-
-```
   <!-- Main Content -->
-  <div id="mainContent" class="mb-6 px-6 pt-4">
+  <div id="mainContent" class="pb-6 px-6 pt-4">
     <!-- Welcome Header -->
     <div id="welcomeHeader">
       <p class="text-sm text-gray-500 leading-loose tracking-[0.5em] uppercase">SRIKANDI</p>
-      <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-3 -tracking-[0.062rem] leading-tight">Skrining Risiko Kanker Mulut Dini</h2>
+      <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-3 -tracking-[0.062rem] leading-tight">Skrining Risiko Dini Kanker Mulut Digital</h2>
     </div>
 
     <!-- Welcome Screen -->
@@ -42,6 +40,20 @@
         <div class="w-full my-6">
           <img src="https://www.pennanthillsdentalcentre.com.au/wp-content/uploads/2024/07/male-patient-with-open-mouth-sitting-in-dental-cha-2023-11-27-05-34-11-utc.jpg" alt="Foto 1" class="w-full aspect-[5/3] object-cover rounded-2xl" />
         </div>
+
+              <!-- Upload Button -->
+      <div class="relative z-10 flex flex-col items-center mx-auto">
+        <button onclick="document.getElementById('fileInput').click()"
+          class="pulse-ring-pill transition-transform active:scale-95 justify-center mx-auto z-10 bg-sky-600 hover:bg-sky-500 text-white font-semibold py-4 px-5 rounded-xl transition-all duration-200 camera-button flex items-center justify-center gap-2"
+        >
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M4 5a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V7a2 2 0 00-2-2h-1.586a1 1 0 01-.707-.293l-1.121-1.121A2 2 0 0011.172 3H8.828a2 2 0 00-1.414.586L6.293 4.707A1 1 0 015.586 5H4zm6 9a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" />
+          </svg>
+          <span class="text-lg font-bold">Ambil/ Upload Foto</span>
+        </button>
+        <p class="text-sm text-gray-400 my-3">Klik tombol di atas untuk memulai</p>
+      </div>
+
         <div class="space-y-3">
           <div class="flex items-start gap-2">
             <span>
@@ -337,7 +349,6 @@
 
   detector.loadModel();
 </script>
-```
-
+    
   </body>
 </html>
