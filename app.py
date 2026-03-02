@@ -88,7 +88,7 @@ def predict():
         # =========================
         # Threshold konservatif
         # =========================
-        if prob_cancer >= 0.8:
+        if prob_cancer >= 0.6:
             is_cancer = True
             confidence = prob_cancer
 
@@ -97,7 +97,7 @@ def predict():
             else:
                 recommendation = "⚠️ Terdeteksi kemungkinan kanker mulut. Disarankan untuk konsultasi ke dokter gigi umum / spesialis penyakit mulut."
 
-        elif prob_cancer <= 0.6:
+        elif prob_cancer <= 0.4:
             is_cancer = False
             confidence = prob_non_cancer
 
@@ -107,7 +107,7 @@ def predict():
                 recommendation = "✅ Kondisi mulut terlihat normal, namun tetap disarankan pemeriksaan untuk memastikan keamanan."
 
         else:
-            # Zona abu-abu 40–80% → default tampil sebagai NON kanker
+            # Zona abu-abu 40–60% → default tampil sebagai NON kanker
             is_cancer = False
             confidence = prob_non_cancer
             recommendation = "ℹ️ Hasil berada pada zona borderline. Lesi memiliki kemungkinan keganasan. Disarankan evaluasi klinis langsung untuk memastikan kondisi lesi."
