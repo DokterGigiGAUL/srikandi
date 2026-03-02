@@ -92,12 +92,12 @@ def predict():
             is_cancer = True
             confidence = prob_cancer
 
-            if confidence >= 0.9:
+            if confidence >= 0.8:
                 recommendation = "⚠️ Suspek kanker mulut dengan tingkat kepercayaan AI sangat tinggi. Konsultasi ke dokter gigi spesialis penyakit mulut, SEGERA!"
             else:
                 recommendation = "⚠️ Terdeteksi kemungkinan kanker mulut. Disarankan untuk konsultasi ke dokter gigi umum / spesialis penyakit mulut."
 
-        elif prob_cancer <= 0.4:
+        elif prob_cancer <= 0.6:
             is_cancer = False
             confidence = prob_non_cancer
 
@@ -110,7 +110,7 @@ def predict():
             # Zona abu-abu 40–80% → default tampil sebagai NON kanker
             is_cancer = False
             confidence = prob_non_cancer
-            recommendation = "ℹ️ Hasil berada pada zona borderline. Disarankan evaluasi klinis langsung untuk memastikan kondisi lesi."
+            recommendation = "ℹ️ Hasil berada pada zona borderline. Lesi memiliki kemungkinan keganasan. Disarankan evaluasi klinis langsung untuk memastikan kondisi lesi."
 
         return jsonify({
             'success': True,
