@@ -37,15 +37,7 @@ body {
 .result-image {
   display: block;
   width: 100%;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  border-radius: 1rem;
-}
-
-.result-image {
-  display: block;
-  width: 100%;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 5 / 3;
   object-fit: cover;
   border-radius: 1rem;
 }
