@@ -207,7 +207,7 @@
       return {
         probability: data.prediction_value,
         confidence: data.confidence / 100,
-        isCancer: data.diagnosis === 'Suspek Kanker Mulut',
+        isCancer: data.diagnosis === 'Cancer Detected',,
         recommendation: data.recommendation
       };
     }
