@@ -207,7 +207,7 @@
       return {
         probability: data.prediction_value,
         confidence: data.confidence / 100,
-        isCancer: data.diagnosis === 'Cancer Detected',  // ✅ DIPERBAIKI: cocokkan dengan response app.py
+        isCancer: data.diagnosis === 'Cancer Detected',,
         recommendation: data.recommendation
       };
     }
@@ -223,7 +223,9 @@
     }
   });
 
+  // ✅ DIPERBAIKI: Tidak ada lagi sisa kode lama (reader.readAsDataURL) di sini
   async function handleImageUpload(file) {
+    // Validasi ukuran maksimal 10MB
     const fileSizeMB = file.size / (1024 * 1024);
     if (fileSizeMB > MAX_FILE_SIZE_MB) {
         alert(`Ukuran file terlalu besar (${fileSizeMB.toFixed(1)} MB).\nMaksimal ${MAX_FILE_SIZE_MB} MB.`);
@@ -231,6 +233,7 @@
         return;
     }
 
+    // Baca gambar TANPA kompresi
     const base64 = await readFileAsBase64(file);
     currentImage = base64;
 
@@ -243,7 +246,7 @@
     const result = await detector.predict(currentImage);
     await uploadToCloud(currentImage, result);
     displayResults(result);
-  }
+}
 
   function displayResults(result) {
     const percentage = (result.confidence * 100).toFixed(2);
@@ -259,10 +262,10 @@
     const recommendationText = document.getElementById('recommendationText');
 
     if (isCancer) {
-      resultCard.className = 'relative -mt-28 z-10 rounded-2xl px-6 py-6 mb-4 bg-red-600 text-white';
+      resultCard.className = 'relative z-10 rounded-2xl px-6 py-6 mb-4 bg-red-600 text-white';
       statusText.textContent = 'KANKER MULUT';
     } else {
-      resultCard.className = 'relative -mt-28 z-10 rounded-2xl px-6 py-6 mb-4 bg-green-700 text-white';
+      resultCard.className = 'relative z-10 rounded-2xl px-6 py-6 mb-4 bg-green-700 text-white';
       statusText.textContent = 'NON KANKER MULUT';
     }
 
@@ -301,14 +304,18 @@
     }
   }
 
-  function readFileAsBase64(file) {
+  // ✅ DIPERBAIKI: reader.readAsDataURL(file) ada di dalam fungsi ini (bukan di luar)
+  // HAPUS seluruh fungsi compressImage() yang lama
+// GANTI dengan fungsi sederhana ini:
+
+function readFileAsBase64(file) {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.onload = (e) => resolve(e.target.result);
         reader.onerror = () => reject(new Error('Gagal membaca file'));
-        reader.readAsDataURL(file);
+        reader.readAsDataURL(file); // langsung baca, tanpa canvas/resize
     });
-  }
+}
 
   function resetApp() {
     document.getElementById('resultScreen').classList.add('hidden');
