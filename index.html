@@ -130,7 +130,7 @@
 
     <!-- Result Screen -->
     <div id="resultScreen" class="hidden">
-      <div class="my-4 rounded-2xl z-9">
+      <div class="my-6 rounded-2xl z-9">
         <img id="resultImage" class="result-image" alt="Result" />
       </div>
       <div id="resultCard" class="relative z-10">
@@ -207,7 +207,7 @@
       return {
         probability: data.prediction_value,
         confidence: data.confidence / 100,
-        isCancer: data.diagnosis === 'Cancer Detected',,
+        isCancer: data.diagnosis === 'Cancer Detected',  // ✅ DIPERBAIKI: cocokkan dengan response app.py
         recommendation: data.recommendation
       };
     }
@@ -223,9 +223,7 @@
     }
   });
 
-  // ✅ DIPERBAIKI: Tidak ada lagi sisa kode lama (reader.readAsDataURL) di sini
   async function handleImageUpload(file) {
-    // Validasi ukuran maksimal 10MB
     const fileSizeMB = file.size / (1024 * 1024);
     if (fileSizeMB > MAX_FILE_SIZE_MB) {
         alert(`Ukuran file terlalu besar (${fileSizeMB.toFixed(1)} MB).\nMaksimal ${MAX_FILE_SIZE_MB} MB.`);
@@ -233,7 +231,6 @@
         return;
     }
 
-    // Baca gambar TANPA kompresi
     const base64 = await readFileAsBase64(file);
     currentImage = base64;
 
@@ -246,7 +243,7 @@
     const result = await detector.predict(currentImage);
     await uploadToCloud(currentImage, result);
     displayResults(result);
-}
+  }
 
   function displayResults(result) {
     const percentage = (result.confidence * 100).toFixed(2);
@@ -304,18 +301,14 @@
     }
   }
 
-  // ✅ DIPERBAIKI: reader.readAsDataURL(file) ada di dalam fungsi ini (bukan di luar)
-  // HAPUS seluruh fungsi compressImage() yang lama
-// GANTI dengan fungsi sederhana ini:
-
-function readFileAsBase64(file) {
+  function readFileAsBase64(file) {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.onload = (e) => resolve(e.target.result);
         reader.onerror = () => reject(new Error('Gagal membaca file'));
-        reader.readAsDataURL(file); // langsung baca, tanpa canvas/resize
+        reader.readAsDataURL(file);
     });
-}
+  }
 
   function resetApp() {
     document.getElementById('resultScreen').classList.add('hidden');
