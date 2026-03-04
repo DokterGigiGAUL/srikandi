@@ -37,7 +37,11 @@ def predict_image(image_bytes):
     try:
         img = Image.open(io.BytesIO(image_bytes)).convert('RGB')
         img = img.resize((IMG_SIZE, IMG_SIZE))
-        img_array = np.array(img, dtype=np.float32) / 255.0
+        img_array = np.array(img, dtype=np.float32)
+        
+        # ✅ HAPUS /255.0 — EfficientNetB0 punya preprocessing sendiri
+        # preprocess_input sudah di-embed dalam model saat training
+        
         img_array = np.expand_dims(img_array, axis=0)
         interpreter.set_tensor(input_details[0]['index'], img_array)
         interpreter.invoke()
@@ -82,35 +86,33 @@ def predict():
         if prediction is None:
             return jsonify({'success': False, 'error': 'Prediction failed'}), 500
 
-        prob_non_cancer = prediction
-        prob_cancer = 1 - prediction
+        # ✅ PERBAIKAN — urutan kelas alfabetis:
+# Kelas 0 = cancerous → prediction RENDAH = cancer
+# Kelas 1 = non cancerous → prediction TINGGI = normal
 
-        # =========================
-        # Threshold konservatif
-        # =========================
-        if prob_cancer >= 0.6:
-            is_cancer = True
-            confidence = prob_cancer
+prob_cancer = 1 - prediction       # ✅ dibalik
+prob_non_cancer = prediction       # ✅ dibalik
 
-            if confidence >= 0.8:
-                recommendation = "⚠️ Suspek kanker mulut dengan tingkat kepercayaan AI sangat tinggi. Konsultasi ke dokter gigi spesialis penyakit mulut, SEGERA!"
-            else:
-                recommendation = "⚠️ Terdeteksi kemungkinan kanker mulut. Disarankan untuk konsultasi ke dokter gigi umum / spesialis penyakit mulut."
+if prob_cancer >= 0.6:
+    is_cancer = True
+    confidence = prob_cancer
+    if confidence >= 0.8:
+        recommendation = "⚠️ Suspek kanker mulut dengan tingkat kepercayaan AI sangat tinggi. Konsultasi ke dokter gigi spesialis penyakit mulut, SEGERA!"
+    else:
+        recommendation = "⚠️ Terdeteksi kemungkinan kanker mulut. Disarankan untuk konsultasi ke dokter gigi umum / spesialis penyakit mulut."
 
-        elif prob_cancer <= 0.4:
-            is_cancer = False
-            confidence = prob_non_cancer
+elif prob_cancer <= 0.4:
+    is_cancer = False
+    confidence = prob_non_cancer
+    if confidence >= 0.8:
+        recommendation = "✅ Kondisi mulut terlihat normal. Tetap jaga kesehatan mulut dengan rutin."
+    else:
+        recommendation = "✅ Kondisi mulut terlihat normal, namun tetap disarankan pemeriksaan berkala."
 
-            if confidence >= 0.8:
-                recommendation = "✅ Kondisi mulut terlihat normal. Tetap jaga kesehatan mulut dengan rutin."
-            else:
-                recommendation = "✅ Kondisi mulut terlihat normal, namun tetap disarankan pemeriksaan untuk memastikan keamanan."
-
-        else:
-            # Zona abu-abu 40–60% → default tampil sebagai NON kanker
-            is_cancer = False
-            confidence = prob_non_cancer
-            recommendation = "ℹ️ Hasil berada pada zona borderline. Lesi memiliki kemungkinan keganasan. Disarankan evaluasi klinis langsung untuk memastikan kondisi lesi."
+else:
+    is_cancer = False
+    confidence = prob_non_cancer
+    recommendation = "ℹ️ Hasil berada pada zona borderline. Disarankan evaluasi klinis langsung."
 
         return jsonify({
             'success': True,
