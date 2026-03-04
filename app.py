@@ -98,32 +98,32 @@ def predict():
             return jsonify({'success': False, 'error': 'Prediction failed'}), 500
 
         # ✅ PERBAIKAN — urutan kelas alfabetis:
-# Kelas 0 = cancerous → prediction RENDAH = cancer
-# Kelas 1 = non cancerous → prediction TINGGI = normal
+        # Kelas 0 = cancerous → prediction RENDAH = cancer
+        # Kelas 1 = non cancerous → prediction TINGGI = normal
 
-prob_cancer = 1 - prediction       # ✅ dibalik
-prob_non_cancer = prediction       # ✅ dibalik
+        prob_cancer = 1 - prediction        # ✅ dibalik
+        prob_non_cancer = prediction        # ✅ dibalik
 
-if prob_cancer >= 0.6:
-    is_cancer = True
-    confidence = prob_cancer
-    if confidence >= 0.8:
-        recommendation = "⚠️ Suspek kanker mulut dengan tingkat kepercayaan AI sangat tinggi. Konsultasi ke dokter gigi spesialis penyakit mulut, SEGERA!"
-    else:
-        recommendation = "⚠️ Terdeteksi kemungkinan kanker mulut. Disarankan untuk konsultasi ke dokter gigi umum / spesialis penyakit mulut."
+        if prob_cancer >= 0.6:
+            is_cancer = True
+            confidence = prob_cancer
+            if confidence >= 0.8:
+                recommendation = "⚠️ Suspek kanker mulut dengan tingkat kepercayaan AI sangat tinggi. Konsultasi ke dokter gigi spesialis penyakit mulut, SEGERA!"
+            else:
+                recommendation = "⚠️ Terdeteksi kemungkinan kanker mulut. Disarankan untuk konsultasi ke dokter gigi umum / spesialis penyakit mulut."
 
-elif prob_cancer <= 0.4:
-    is_cancer = False
-    confidence = prob_non_cancer
-    if confidence >= 0.8:
-        recommendation = "✅ Kondisi mulut terlihat normal. Tetap jaga kesehatan mulut dengan rutin."
-    else:
-        recommendation = "✅ Kondisi mulut terlihat normal, namun tetap disarankan pemeriksaan berkala."
+        elif prob_cancer <= 0.4:
+            is_cancer = False
+            confidence = prob_non_cancer
+            if confidence >= 0.8:
+                recommendation = "✅ Kondisi mulut terlihat normal. Tetap jaga kesehatan mulut dengan rutin."
+            else:
+                recommendation = "✅ Kondisi mulut terlihat normal, namun tetap disarankan pemeriksaan berkala."
 
-else:
-    is_cancer = False
-    confidence = prob_non_cancer
-    recommendation = "ℹ️ Hasil berada pada zona borderline. Disarankan evaluasi klinis langsung."
+        else:
+            is_cancer = False
+            confidence = prob_non_cancer
+            recommendation = "ℹ️ Hasil berada pada zona borderline. Disarankan evaluasi klinis langsung."
 
         return jsonify({
             'success': True,
