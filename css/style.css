@@ -157,7 +157,7 @@ body {
 .pulse-ring-pill::before {
   content: "";
   position: absolute;
-  inset: -5px;
+  inset: -7px;
   border-radius: 16px;
   background: #2563EB;
   animation: pulse-ring-pill 2s ease-out infinite;
