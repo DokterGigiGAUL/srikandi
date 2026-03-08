@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="id">
   <head>
     <meta charset="UTF-8" />
@@ -11,39 +10,96 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+
+      .risk-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 14px;
+        border-radius: 9999px;
+        border: 1.5px solid #e2e8f0;
+        background: #f8fafc;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: #475569;
+        cursor: pointer;
+        transition: all 0.15s ease;
+        user-select: none;
+      }
+      .risk-chip:hover { border-color: #0284c7; color: #0284c7; background: #f0f9ff; }
+      .risk-chip.active { background: #0284c7; border-color: #0284c7; color: white; }
+
+      .patient-form {
+        background: white;
+        border-radius: 1rem;
+        border: 1.5px solid #e2e8f0;
+        padding: 1.25rem;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+      }
+      .form-label {
+        display: block;
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #64748b;
+        margin-bottom: 0.4rem;
+      }
+      .form-input {
+        width: 100%;
+        border: 1.5px solid #e2e8f0;
+        border-radius: 0.6rem;
+        padding: 0.6rem 0.85rem;
+        font-size: 0.95rem;
+        color: #1e293b;
+        background: #f8fafc;
+        outline: none;
+        transition: border-color 0.15s;
+        box-sizing: border-box;
+      }
+      .form-input:focus { border-color: #0284c7; background: white; }
+      select.form-input { appearance: none; -webkit-appearance: none; cursor: pointer; }
+    </style>
   </head>
 
   <body class="bg-gray-200">
     <input type="file" id="fileInput" accept="image/*" class="hidden" />
+
     <div class="max-w-lg md:w-xl mx-auto min-h-screen bg-[linear-gradient(to_bottom,rgba(255,255,255,0.95),rgba(255,255,255,0.98)),url('https://live.staticflickr.com/65535/55111931235_97bf050cce_c.jpg')] bg-local bg-cover bg-center">
-      <!-- Header with Logo -->
+
+      <!-- Header -->
       <div class="flex items-center mx-auto justify-center bg-none mx-6 py-3 border-b border-gray-300">
         <div class="w-8 h-auto rounded-lg mx-auto justify-center">
           <a href="https://doktergigigaul.github.io/srikandi">
-          <img src="https://doktergigigaul.github.io/ocre/Logo-gigital-2.png" /></a>
+            <img src="https://doktergigigaul.github.io/ocre/Logo-gigital-2.png" />
+          </a>
         </div>
       </div>
-  <!-- Main Content -->
-  <div id="mainContent" class="pb-6 px-6 pt-4">
-    <!-- Welcome Header -->
-    <div id="welcomeHeader">
-      <p class="text-sm text-gray-500 leading-loose tracking-[0.5em] uppercase">SRIKANDI</p>
-      <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 mt-3 mb-6 -tracking-[0.062rem] leading-[1.25] md:leading-[1.25]">Skrining Risiko Dini Kanker Mulut Digital</h2>
-    </div>
 
-    <!-- Welcome Screen -->
-    <div id="welcomeScreen">
-      <div class="mb-6">
-        
-        <div class="w-full">
-          <img src="https://www.pennanthillsdentalcentre.com.au/wp-content/uploads/2024/07/male-patient-with-open-mouth-sitting-in-dental-cha-2023-11-27-05-34-11-utc.jpg" alt="Foto 1" class="hidden w-full aspect-[4/3] object-cover rounded-2xl" />
-          <img src="https://framerusercontent.com/images/PX4Hi9dXBjfyJxSJrB0CMBofN4.jpg" alt="Foto 1" class="w-full aspect-[4/3] object-cover rounded-2xl mb-6">
-          <p class="text-lg md:text-xl text-gray-700 leading-snug">
-          Penilaian dini potensi kanker mulut/ non-kanker dari foto lesi menggunakan persentase bot berbasis AI.
-        </p>
+      <!-- Main Content -->
+      <div id="mainContent" class="pb-6 px-6 pt-4">
+
+        <!-- Welcome Header -->
+        <div id="welcomeHeader">
+          <p class="text-sm text-gray-500 leading-loose tracking-[0.5em] uppercase">SRIKANDI</p>
+          <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 mt-3 mb-6 -tracking-[0.062rem] leading-[1.25] md:leading-[1.25]">Skrining Risiko Dini Kanker Mulut Digital</h2>
         </div>
-        <div class="bg-white pt-6 pb-3 px-3 space-y-3 rounded-2xl mt-6 border-2">
-            <div class="flex items-start gap-1">
+
+        <!-- Welcome Screen -->
+        <div id="welcomeScreen">
+          <div class="mb-6">
+            <div class="w-full">
+              <img src="https://framerusercontent.com/images/PX4Hi9dXBjfyJxSJrB0CMBofN4.jpg" alt="Foto 1" class="w-full aspect-[4/3] object-cover rounded-2xl mb-6">
+              <p class="text-lg md:text-xl text-gray-700 leading-snug">
+                Penilaian dini potensi kanker mulut/ non-kanker dari foto lesi menggunakan persentase bot berbasis AI.
+              </p>
+            </div>
+
+            <!-- Instructions -->
+            <div class="bg-white pt-5 pb-4 px-4 space-y-3 rounded-2xl mt-6 border-2">
+              <div class="flex items-start gap-1">
                 <span>
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-7 h-5 text-sky-600" fill="currentColor">
                     <path d="M12 2C6.477 2 2 6.477 2 12c0 1.821.487 3.53 1.338 5L2 22l5-1.338c1.47.851 3.179 1.338 5 1.338 5.523 0 10-4.477 10-10S17.523 2 12 2z" />
@@ -51,158 +107,267 @@
                     <path d="M11 11h2v6h-2v-6z" fill="white" />
                   </svg>
                 </span>
-                <div class="">
-                    <p class="font-semibold text-gray-950 leading-tight">PETUNJUK PENGGUNAAN:</p>
-                </div>
-            </div>
-              <ol class="text-normal text-gray-700 my-3 pb-0 space-y-1 leading-tight list-decimal px-6">
-                <li>Klik tombol 📷 Ambil/ Upload Foto</li>
-                <li>Tunggu proses analisis bot Srikandi</li>
+                <p class="font-semibold text-gray-950 leading-tight">PETUNJUK PENGGUNAAN:</p>
+              </div>
+              <ol class="text-normal text-gray-700 my-2 pb-0 space-y-1 leading-tight list-decimal px-6">
+                <li>Klik tombol 📷 Ambil/ Upload Foto lesi</li>
+                <li>Isi data pasien (usia, jenis kelamin, faktor risiko)</li>
+                <li>Klik Mulai Analisis AI</li>
                 <li>Dapatkan probabilitas dan persentase hasil deteksi</li>
               </ol>
+            </div>
+
+
+            <!-- Upload Button -->
             <div class="relative z-10 flex flex-col items-center mx-auto">
-        <button onclick="document.getElementById('fileInput').click()"
-          class="hidden pulse-ring-pill transition-transform active:scale-95 justify-center mx-auto z-10 bg-sky-600 hover:bg-sky-500 text-white font-semibold py-4 px-6 mt-6 rounded-2xl transition-all duration-200 camera-button flex items-center justify-center gap-2"
-        >
-          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M4 5a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V7a2 2 0 00-2-2h-1.586a1 1 0 01-.707-.293l-1.121-1.121A2 2 0 0011.172 3H8.828a2 2 0 00-1.414.586L6.293 4.707A1 1 0 015.586 5H4zm6 9a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" />
-          </svg>
-          <span class="text-lg font-bold">Ambil/ Upload Foto</span>
-        </button>
-        <p class="hidden text-sm text-gray-400 my-3">Klik tombol di atas untuk memulai</p>
-      </div>  
-        </div>
-        
-              <!-- Upload Button -->
-      <div class="relative z-10 flex flex-col items-center mx-auto">
-        <button onclick="document.getElementById('fileInput').click()"
-          class="fixed bottom-6 pulse-ring-pill transition-transform active:scale-95 justify-center mx-auto z-10 bg-sky-600 hover:bg-sky-500 text-white font-semibold py-4 px-6 rounded-2xl transition-all duration-200 camera-button flex items-center justify-center gap-2"
-        >
-          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M4 5a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V7a2 2 0 00-2-2h-1.586a1 1 0 01-.707-.293l-1.121-1.121A2 2 0 0011.172 3H8.828a2 2 0 00-1.414.586L6.293 4.707A1 1 0 015.586 5H4zm6 9a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" />
-          </svg>
-          <span class="text-lg font-bold">Ambil/ Upload Foto</span>
-        </button>
-      </div>
+              <button onclick="handleUploadClick()"
+                class="fixed bottom-6 pulse-ring-pill transition-transform active:scale-95 justify-center mx-auto z-10 bg-sky-600 hover:bg-sky-500 text-white font-semibold py-4 px-6 rounded-2xl transition-all duration-200 flex items-center justify-center gap-2"
+              >
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M4 5a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V7a2 2 0 00-2-2h-1.586a1 1 0 01-.707-.293l-1.121-1.121A2 2 0 0011.172 3H8.828a2 2 0 00-1.414.586L6.293 4.707A1 1 0 015.586 5H4zm6 9a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" />
+                </svg>
+                <span class="text-lg font-bold">Ambil/ Upload Foto</span>
+              </button>
+            </div>
 
-      <!-- Warning Card -->
-      <div class="bg-yellow-100 border border-yellow-100 rounded-xl md:rounded-2xl p-4 my-6">
-        <div class="flex items-start gap-2">
-          <span>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="12" height="24">
-              <path d="M12 2L1 21h22L12 2z" fill="#FFD700" stroke="black" stroke-width="2" />
-              <path d="M11 7h2v7h-2zM11 17h2v2h-2z" fill="black" />
-            </svg>
-          </span>
-          <div><p class="font-bold text-gray-900 mb-2">DISCLAIMER:</p></div>
+            <!-- Warning Card -->
+            <div class="bg-yellow-100 border border-yellow-100 rounded-xl md:rounded-2xl p-4 my-6">
+              <div class="flex items-start gap-2">
+                <span>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="12" height="24">
+                    <path d="M12 2L1 21h22L12 2z" fill="#FFD700" stroke="black" stroke-width="2" />
+                    <path d="M11 7h2v7h-2zM11 17h2v2h-2z" fill="black" />
+                  </svg>
+                </span>
+                <div><p class="font-bold text-gray-900 mb-2">DISCLAIMER:</p></div>
+              </div>
+              <ul class="text-sm text-gray-800 space-y-1 list-disc pl-4">
+                <li>Hasil hanya untuk screening resiko awal, BUKAN pengganti diagnosis medis dokter gigi profesional</li>
+                <li>Selalu konsultasi dengan dokter gigi spesialis penyakit mulut untuk diagnosis medis akhir</li>
+                <li>Hanya untuk digunakan oleh tenaga medis profesional yang kompeten</li>
+              </ul>
+            </div>
+          </div>
         </div>
-        <ul class="text-sm text-gray-800 space-y-1 list-disc pl-4">
-          <li>Hasil hanya untuk screening resiko awal, BUKAN pengganti diagnosis medis dokter gigi profesional</li>
-          <li>Selalu konsultasi dengan dokter gigi spesialis penyakit mulut untuk diagnosis medis akhir</li>
-          <li>Hanya untuk digunakan oleh tenaga medis profesional yang kompeten</li>
-        </ul>
-      </div>
+
+        <!-- Preview Screen (foto + isi data pasien) -->
+        <div id="previewScreen" class="hidden">
+          <!-- Image preview -->
+          <div class="my-4">
+            <img id="imagePreviewForm" class="result-image" alt="Preview Foto Lesi" />
+            <button onclick="changePhoto()" class="mt-3 flex items-center gap-2 text-sm text-sky-600 font-medium hover:underline">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586A2 2 0 0112 11h4m0 0l-4-4m4 4H4"/></svg>
+              Ganti foto
+            </button>
+          </div>
+
+          <!-- Patient Data Form -->
+          <div class="patient-form">
+            <p class="text-xs font-bold tracking-widest text-sky-700 uppercase mb-4">Data Pasien</p>
+
+            <!-- Usia -->
+            <div class="mb-4">
+              <label class="form-label">Usia (tahun)</label>
+              <input type="number" id="inputUsia" class="form-input" placeholder="Contoh: 55" min="1" max="120" />
+            </div>
+
+            <!-- Jenis Kelamin -->
+            <div class="mb-4">
+              <label class="form-label">Jenis Kelamin</label>
+              <div style="position:relative;">
+                <select id="inputKelamin" class="form-input pr-8">
+                  <option value="">-- Pilih --</option>
+                  <option value="Laki-laki">Laki-laki</option>
+                  <option value="Perempuan">Perempuan</option>
+                </select>
+                <svg style="position:absolute;right:10px;top:50%;transform:translateY(-50%);pointer-events:none;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#94a3b8" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+              </div>
+            </div>
+
+            <!-- Faktor Risiko -->
+            <div>
+              <label class="form-label">Faktor Risiko (pilih semua yang relevan)</label>
+              <div class="flex flex-wrap gap-2 mt-1" id="riskChipsContainer">
+                <button type="button" class="risk-chip" data-risk="Merokok" onclick="toggleRisk(this)">🚬 Merokok</button>
+                <button type="button" class="risk-chip" data-risk="Alkohol" onclick="toggleRisk(this)">🍺 Alkohol</button>
+                <button type="button" class="risk-chip" data-risk="Sirih/Tembakau kunyah" onclick="toggleRisk(this)">🌿 Sirih</button>
+                <button type="button" class="risk-chip" data-risk="HPV" onclick="toggleRisk(this)">🧬 HPV</button>
+                <button type="button" class="risk-chip" data-risk="Riwayat kanker mulut keluarga" onclick="toggleRisk(this)">👨‍👩‍👧 Riwayat Keluarga</button>
+                <button type="button" class="risk-chip" data-risk="Paparan sinar matahari berlebih" onclick="toggleRisk(this)">☀️ Paparan UV</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Start Analysis Button -->
+          <button onclick="startAnalysis()"
+            class="w-full pulse-ring-pill transition-transform active:scale-95 bg-sky-600 hover:bg-sky-500 text-white font-bold py-5 px-6 rounded-2xl flex items-center justify-center gap-3 mb-6 text-lg">
+            🔬 <span>Mulai Analisis AI</span>
+          </button>
+
+          <!-- Disclaimer -->
+          <div class="bg-yellow-100 border border-yellow-100 rounded-xl md:rounded-2xl p-4 mb-6">
+            <div class="flex items-start gap-2">
+              <span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="12" height="24">
+                  <path d="M12 2L1 21h22L12 2z" fill="#FFD700" stroke="black" stroke-width="2" />
+                  <path d="M11 7h2v7h-2zM11 17h2v2h-2z" fill="black" />
+                </svg>
+              </span>
+              <div><p class="font-bold text-gray-900 mb-2">DISCLAIMER:</p></div>
+            </div>
+            <ul class="text-sm text-gray-800 space-y-1 list-disc pl-4">
+              <li>Hasil hanya untuk screening resiko awal, BUKAN pengganti diagnosis medis dokter gigi profesional</li>
+              <li>Selalu konsultasi dengan dokter gigi spesialis penyakit mulut untuk diagnosis medis akhir</li>
+              <li>Hanya untuk digunakan oleh tenaga medis profesional yang kompeten</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Processing Screen -->
+        <div id="processingScreen" class="hidden">
+          <div class="my-6">
+            <img id="imagePreview" class="result-image" alt="Preview" />
+          </div>
+          <!-- Patient data summary during processing -->
+          <div id="processingPatientSummary" class="bg-sky-50 border border-sky-100 rounded-xl px-4 py-3 mb-4 text-sm text-sky-800"></div>
+          <div class="space-y-2">
+            <button class="w-auto mx-auto flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-gray-500 hover:bg-gray-600 text-white">
+              <svg class="animate-spin h-4 w-4 text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              <span class="text-lg font-bold">Menganalisis</span>
+            </button>
+            <p class="text-center text-sm text-gray-500">Harap menunggu... Terimakasih.</p>
+          </div>
+          <div class="bg-yellow-100 border border-yellow-100 rounded-xl md:rounded-2xl p-4 my-6">
+            <div class="flex items-start gap-2">
+              <span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="12" height="24">
+                  <path d="M12 2L1 21h22L12 2z" fill="#FFD700" stroke="black" stroke-width="2" />
+                  <path d="M11 7h2v7h-2zM11 17h2v2h-2z" fill="black" />
+                </svg>
+              </span>
+              <div><p class="font-bold text-gray-900 mb-2">DISCLAIMER:</p></div>
+            </div>
+            <ul class="text-sm text-gray-800 space-y-1 list-disc pl-4">
+              <li>Hasil hanya untuk screening resiko awal, BUKAN pengganti diagnosis medis dokter gigi profesional</li>
+              <li>Selalu konsultasi dengan dokter gigi spesialis penyakit mulut untuk diagnosis medis akhir</li>
+              <li>Hanya untuk digunakan oleh tenaga medis profesional yang kompeten</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Result Screen -->
+        <div id="resultScreen" class="hidden">
+          <div class="my-6 rounded-2xl z-9">
+            <img id="resultImage" class="result-image" alt="Result" />
+          </div>
+
+          <!-- Patient data badge on result -->
+          <div id="resultPatientBadge" class="flex flex-wrap gap-2 mb-4"></div>
+
+          <div id="resultCard" class="relative z-10">
+            <div class="text-left">
+              <p class="text-md mb-1">
+                <span class="font-bold">Probabilitas:</span>
+                <span id="statusText" class="font-bold"></span>
+              </p>
+              <p class="text-md">
+                <span class="font-base">Persentase:</span>
+                <span id="confidenceText" class="font-base"></span>
+              </p>
+            </div>
+          </div>
+
+          <!-- Risk factor contribution note -->
+          <div id="riskAdjustmentNote" class="hidden bg-orange-50 border border-orange-200 rounded-xl px-4 py-3 mb-4 text-sm text-orange-800 mt-3"></div>
+
+          <div class="bg-none rounded-xl border-none mb-4">
+            <p id="recommendationText" class="text-gray-900 leading-normal"></p>
+          </div>
+
+          <button onclick="resetApp()" class="w-full mb-4 bg-sky-600 hover:bg-sky-700 text-white font-semibold p-5 rounded-xl transition-all duration-200 flex items-center justify-center mx-auto gap-3">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M4 5a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V7a2 2 0 00-2-2h-1.586a1 1 0 01-.707-.293l-1.121-1.121A2 2 0 0011.172 3H8.828a2 2 0 00-1.414.586L6.293 4.707A1 1 0 015.586 5H4zm6 9a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" />
+            </svg>
+            <span class="text-lg">Penilaian resiko lesi baru</span>
+          </button>
+
+          <div class="bg-yellow-100 border border-yellow-100 rounded-xl md:rounded-2xl p-4 my-6">
+            <div class="flex items-start gap-2">
+              <span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="12" height="24">
+                  <path d="M12 2L1 21h22L12 2z" fill="#FFD700" stroke="black" stroke-width="2" />
+                  <path d="M11 7h2v7h-2zM11 17h2v2h-2z" fill="black" />
+                </svg>
+              </span>
+              <div><p class="font-bold text-gray-900 mb-2">DISCLAIMER:</p></div>
+            </div>
+            <ul class="text-sm text-gray-800 space-y-1 list-disc pl-4">
+              <li>Hasil hanya untuk screening resiko awal, BUKAN pengganti diagnosis medis dokter gigi profesional</li>
+              <li>Selalu konsultasi dengan dokter gigi spesialis penyakit mulut untuk diagnosis medis akhir</li>
+              <li>Hanya untuk digunakan oleh tenaga medis profesional yang kompeten</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Copyright -->
+        <div><p class="flex text-gray-400 items-center justify-center mx-auto text-xs">Copyright (c) Gigital - 2026</p></div>
       </div>
     </div>
-    <!-- Processing Screen -->
-    <div id="processingScreen" class="hidden">
-      <div class="my-6">
-        <img id="imagePreview" class="result-image" alt="Preview" />
-      </div>
-      <div class="space-y-2">
-        <button class="w-auto mx-auto flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-gray-500 hover:bg-gray-600 text-white">
-          <svg class="animate-spin h-4 w-4 text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-          </svg>
-          <span class="text-lg font-bold">Menganalisis</span>
-        </button>
-        <p class="text-center text-sm text-gray-500">Harap menunggu... Terimakasih.</p>
-      </div>
-      <div class="bg-yellow-100 border border-yellow-100 rounded-xl md:rounded-2xl p-4 my-6">
-        <div class="flex items-start gap-2">
-          <span>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="12" height="24">
-              <path d="M12 2L1 21h22L12 2z" fill="#FFD700" stroke="black" stroke-width="2" />
-              <path d="M11 7h2v7h-2zM11 17h2v2h-2z" fill="black" />
-            </svg>
-          </span>
-          <div><p class="font-bold text-gray-900 mb-2">DISCLAIMER:</p></div>
-        </div>
-        <ul class="text-sm text-gray-800 space-y-1 list-disc pl-4">
-          <li>Hasil hanya untuk screening resiko awal, BUKAN pengganti diagnosis medis dokter gigi profesional</li>
-          <li>Selalu konsultasi dengan dokter gigi spesialis penyakit mulut untuk diagnosis medis akhir</li>
-          <li>Hanya untuk digunakan oleh tenaga medis profesional yang kompeten</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Result Screen -->
-    <div id="resultScreen" class="hidden">
-      <div class="my-6 rounded-2xl z-9">
-        <img id="resultImage" class="result-image" alt="Result" />
-      </div>
-      <div id="resultCard" class="relative z-10">
-        <div class="text-left">
-          <p class="text-md mb-1">
-            <span class="font-bold">Probabilitas:</span>
-            <span id="statusText" class="font-bold"></span>
-          </p>
-          <p class="text-md">
-            <span class="font-base">Persentase:</span>
-            <span id="confidenceText" class="font-base"></span>
-          </p>
-        </div>
-      </div>
-      <div class="bg-none rounded-xl border-none mb-4">
-        <p id="recommendationText" class="text-gray-900 leading-normal"></p>
-      </div>
-
-      <button onclick="resetApp()" class="w-full mb-4 bg-sky-600 hover:bg-sky-700 text-white font-semibold p-5 rounded-xl transition-all duration-200 camera-button flex items-center justify-center mx-auto gap-3">
-        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-          <path fill-rule="evenodd" d="M4 5a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V7a2 2 0 00-2-2h-1.586a1 1 0 01-.707-.293l-1.121-1.121A2 2 0 0011.172 3H8.828a2 2 0 00-1.414.586L6.293 4.707A1 1 0 015.586 5H4zm6 9a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" />
-        </svg>
-        <span class="text-lg">Penilaian resiko lesi baru</span>
-      </button>
-
-      <div class="bg-yellow-100 border border-yellow-100 rounded-xl md:rounded-2xl p-4 my-6">
-        <div class="flex items-start gap-2">
-          <span>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="12" height="24">
-              <path d="M12 2L1 21h22L12 2z" fill="#FFD700" stroke="black" stroke-width="2" />
-              <path d="M11 7h2v7h-2zM11 17h2v2h-2z" fill="black" />
-            </svg>
-          </span>
-          <div><p class="font-bold text-gray-900 mb-2">DISCLAIMER:</p></div>
-        </div>
-        <ul class="text-sm text-gray-800 space-y-1 list-disc pl-4">
-          <li>Hasil hanya untuk screening resiko awal, BUKAN pengganti diagnosis medis dokter gigi profesional</li>
-          <li>Selalu konsultasi dengan dokter gigi spesialis penyakit mulut untuk diagnosis medis akhir</li>
-          <li>Hanya untuk digunakan oleh tenaga medis profesional yang kompeten</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Copyright -->
-    <div><p class="flex text-gray-400 items-center justify-center mx-auto text-xs">Copyright (c) Gigital - 2026</p></div>
-  </div>
-
 
 <script>
   const BACKEND_API_URL = 'https://script.google.com/macros/s/AKfycbzUWjjMNL4ZbTlSFz9lRBe44qXtsXtLaZpab5PMvwQVpCo9SXiB75LnpGVnAtMMnYPenA/exec';
   const MAX_FILE_SIZE_MB = 10;
-  
+  const ANTHROPIC_API_URL = 'https://api.anthropic.com/v1/messages';
+
+  // ── Risk chip toggle ──────────────────────────────────────────────
+  function toggleRisk(el) {
+    el.classList.toggle('active');
+  }
+
+  function getSelectedRisks() {
+    const chips = document.querySelectorAll('#riskChipsContainer .risk-chip.active');
+    return Array.from(chips).map(c => c.dataset.risk);
+  }
+
+  // ── Upload click: validate form first ───────────────────────────
+  function handleUploadClick() {
+    document.getElementById('fileInput').click();
+  }
+
+  // ── Compute clinical risk adjustment ────────────────────────────
+  function computeRiskAdjustment(usia, kelamin, risks) {
+    let score = 0;
+    const notes = [];
+
+    // Age factor
+    if (usia >= 60) { score += 0.12; notes.push(`usia ${usia} tahun (risiko tinggi ≥60)`); }
+    else if (usia >= 40) { score += 0.06; notes.push(`usia ${usia} tahun (risiko sedang 40–59)`); }
+    else if (usia > 0) { notes.push(`usia ${usia} tahun (risiko rendah <40)`); }
+
+    // Gender factor (men slightly higher risk in literature)
+    if (kelamin === 'Laki-laki') { score += 0.04; notes.push('jenis kelamin laki-laki'); }
+
+    // Risk factors
+    if (risks.includes('Merokok')) { score += 0.10; notes.push('merokok'); }
+    if (risks.includes('Alkohol')) { score += 0.08; notes.push('konsumsi alkohol'); }
+    if (risks.includes('Sirih/Tembakau kunyah')) { score += 0.10; notes.push('penggunaan sirih/tembakau kunyah'); }
+    if (risks.includes('HPV')) { score += 0.07; notes.push('infeksi HPV'); }
+    if (risks.includes('Riwayat kanker mulut keluarga')) { score += 0.06; notes.push('riwayat keluarga'); }
+    if (risks.includes('Paparan sinar matahari berlebih')) { score += 0.04; notes.push('paparan UV berlebih'); }
+
+    return { score: Math.min(score, 0.40), notes };
+  }
+
+  // ── Main detector ─────────────────────────────────────────────────
   class OralCancerDetector {
-    constructor() {
-      this.modelLoaded = false;
-    }
+    constructor() { this.modelLoaded = false; }
 
     async loadModel() {
       return new Promise(resolve => {
-        setTimeout(() => {
-          this.modelLoaded = true;
-          resolve();
-        }, 500);
+        setTimeout(() => { this.modelLoaded = true; resolve(); }, 500);
       });
     }
 
@@ -227,35 +392,80 @@
 
   document.getElementById('fileInput').addEventListener('change', async (e) => {
     const file = e.target.files[0];
-    if (file) {
-      await handleImageUpload(file);
-    }
+    if (file) await handleImageUpload(file);
   });
 
-  // ✅ DIPERBAIKI: Tidak ada lagi sisa kode lama (reader.readAsDataURL) di sini
   async function handleImageUpload(file) {
-    // Validasi ukuran maksimal 10MB
     const fileSizeMB = file.size / (1024 * 1024);
     if (fileSizeMB > MAX_FILE_SIZE_MB) {
-        alert(`Ukuran file terlalu besar (${fileSizeMB.toFixed(1)} MB).\nMaksimal ${MAX_FILE_SIZE_MB} MB.`);
-        document.getElementById('fileInput').value = '';
-        return;
+      alert(`Ukuran file terlalu besar (${fileSizeMB.toFixed(1)} MB).\nMaksimal ${MAX_FILE_SIZE_MB} MB.`);
+      document.getElementById('fileInput').value = '';
+      return;
     }
 
-    // Baca gambar TANPA kompresi
     const base64 = await readFileAsBase64(file);
     currentImage = base64;
 
+    // Show preview screen with image + patient form
     document.getElementById('welcomeScreen').classList.add('hidden');
+    document.getElementById('welcomeHeader').classList.add('hidden');
+    document.getElementById('previewScreen').classList.remove('hidden');
+    document.getElementById('imagePreviewForm').src = currentImage;
+
+    // Reset form fields
+    document.getElementById('inputUsia').value = '';
+    document.getElementById('inputKelamin').value = '';
+    document.querySelectorAll('#riskChipsContainer .risk-chip').forEach(c => c.classList.remove('active'));
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function changePhoto() {
+    document.getElementById('fileInput').value = '';
+    document.getElementById('fileInput').click();
+  }
+
+  async function startAnalysis() {
+    // Collect patient data from preview form
+    const usia    = parseInt(document.getElementById('inputUsia').value) || 0;
+    const kelamin = document.getElementById('inputKelamin').value;
+    const risks   = getSelectedRisks();
+
+    // Show processing screen
+    document.getElementById('previewScreen').classList.add('hidden');
     document.getElementById('processingScreen').classList.remove('hidden');
     document.getElementById('imagePreview').src = currentImage;
+
+    // Patient summary during processing
+    let summaryParts = [];
+    if (usia > 0) summaryParts.push(`Usia: ${usia} tahun`);
+    if (kelamin) summaryParts.push(`Kelamin: ${kelamin}`);
+    if (risks.length > 0) summaryParts.push(`Risiko: ${risks.join(', ')}`);
+    document.getElementById('processingPatientSummary').textContent =
+      summaryParts.length > 0 ? '🔍 Menganalisis dengan data: ' + summaryParts.join(' · ') : '🔍 Menganalisis gambar lesi...';
 
     if (!detector.modelLoaded) await detector.loadModel();
 
     const result = await detector.predict(currentImage);
-    await uploadToCloud(currentImage, result);
-    displayResults(result);
-}
+
+    // Apply clinical risk adjustment
+    const { score: riskBoost, notes: riskNotes } = computeRiskAdjustment(usia, kelamin, risks);
+    const adjustedResult = { ...result };
+
+    if (result.isCancer && riskBoost > 0) {
+      adjustedResult.confidence = Math.min(result.confidence + riskBoost * result.confidence, 0.99);
+    } else if (!result.isCancer && riskBoost > 0.15) {
+      adjustedResult.riskWarning = true;
+    }
+    adjustedResult.riskNotes = riskNotes;
+    adjustedResult.riskBoost = riskBoost;
+    adjustedResult.usia = usia;
+    adjustedResult.kelamin = kelamin;
+    adjustedResult.risks = risks;
+
+    await uploadToCloud(currentImage, adjustedResult, usia, kelamin, risks);
+    displayResults(adjustedResult);
+  }
 
   function displayResults(result) {
     const percentage = (result.confidence * 100).toFixed(2);
@@ -265,8 +475,8 @@
     document.getElementById('resultScreen').classList.remove('hidden');
     document.getElementById('resultImage').src = currentImage;
 
-    const resultCard = document.getElementById('resultCard');
-    const statusText = document.getElementById('statusText');
+    const resultCard     = document.getElementById('resultCard');
+    const statusText     = document.getElementById('statusText');
     const confidenceText = document.getElementById('confidenceText');
     const recommendationText = document.getElementById('recommendationText');
 
@@ -281,6 +491,35 @@
     confidenceText.textContent = `${percentage}% (${getConfidenceLevel(result.confidence)})`;
     recommendationText.textContent = result.recommendation;
 
+    // Patient badges
+    const badgeEl = document.getElementById('resultPatientBadge');
+    badgeEl.innerHTML = '';
+    if (result.usia > 0) badgeEl.innerHTML += `<span class="bg-sky-100 text-sky-700 text-xs font-semibold px-3 py-1 rounded-full">Usia: ${result.usia} thn</span>`;
+    if (result.kelamin) badgeEl.innerHTML += `<span class="bg-purple-100 text-purple-700 text-xs font-semibold px-3 py-1 rounded-full">${result.kelamin}</span>`;
+    if (result.risks && result.risks.length > 0) {
+      result.risks.forEach(r => {
+        badgeEl.innerHTML += `<span class="bg-orange-100 text-orange-700 text-xs font-semibold px-3 py-1 rounded-full">${r}</span>`;
+      });
+    }
+
+    // Risk adjustment note
+    const riskNoteEl = document.getElementById('riskAdjustmentNote');
+    if (result.riskNotes && result.riskNotes.length > 0) {
+      riskNoteEl.classList.remove('hidden');
+      const boostPct = (result.riskBoost * 100).toFixed(0);
+      if (result.riskWarning) {
+        riskNoteEl.className = 'bg-red-50 border border-red-200 rounded-xl px-4 py-3 mb-4 text-sm text-red-800 mt-3';
+        riskNoteEl.innerHTML = `⚠️ <strong>Perhatian klinis:</strong> Meskipun analisis gambar menunjukkan Non-Kanker, faktor risiko pasien (${result.riskNotes.join(', ')}) meningkatkan probabilitas klinis secara signifikan. Disarankan pemeriksaan biopsi dan rujukan ke Spesialis Penyakit Mulut.`;
+      } else if (result.riskBoost > 0) {
+        riskNoteEl.className = 'bg-orange-50 border border-orange-200 rounded-xl px-4 py-3 mb-4 text-sm text-orange-800 mt-3';
+        riskNoteEl.innerHTML = `📊 <strong>Penyesuaian risiko klinis (+${boostPct}%):</strong> Faktor ${result.riskNotes.join(', ')} meningkatkan probabilitas hasil analisis.`;
+      } else {
+        riskNoteEl.classList.add('hidden');
+      }
+    } else {
+      riskNoteEl.classList.add('hidden');
+    }
+
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
@@ -290,17 +529,18 @@
     return 'Rendah';
   }
 
-  async function uploadToCloud(imageData, predictionResult) {
+  async function uploadToCloud(imageData, predictionResult, usia, kelamin, risks) {
     try {
       const formData = new FormData();
       formData.append('file', imageData);
       formData.append('filename', 'oral_cancer.jpg');
       formData.append('mimeType', 'image/jpeg');
       formData.append('timestamp', new Date().toISOString());
-      formData.append('age', '');
-      formData.append('gender', '');
+      formData.append('age', usia || '');
+      formData.append('gender', kelamin || '');
+      formData.append('riskFactors', risks.join(', '));
       formData.append('prediction', predictionResult ?
-        `${(predictionResult.probability * 100).toFixed(2)}% - ${predictionResult.isCancer ? 'Kanker' : 'Non-Kanker'}` :
+        `${(predictionResult.confidence * 100).toFixed(2)}% - ${predictionResult.isCancer ? 'Kanker' : 'Non-Kanker'}` :
         'Unknown');
 
       const response = await fetch(BACKEND_API_URL, { method: 'POST', body: formData });
@@ -313,23 +553,21 @@
     }
   }
 
-  // ✅ DIPERBAIKI: reader.readAsDataURL(file) ada di dalam fungsi ini (bukan di luar)
-  // HAPUS seluruh fungsi compressImage() yang lama
-// GANTI dengan fungsi sederhana ini:
-
-function readFileAsBase64(file) {
+  function readFileAsBase64(file) {
     return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = (e) => resolve(e.target.result);
-        reader.onerror = () => reject(new Error('Gagal membaca file'));
-        reader.readAsDataURL(file); // langsung baca, tanpa canvas/resize
+      const reader = new FileReader();
+      reader.onload = (e) => resolve(e.target.result);
+      reader.onerror = () => reject(new Error('Gagal membaca file'));
+      reader.readAsDataURL(file);
     });
-}
+  }
 
   function resetApp() {
     document.getElementById('resultScreen').classList.add('hidden');
     document.getElementById('processingScreen').classList.add('hidden');
+    document.getElementById('previewScreen').classList.add('hidden');
     document.getElementById('welcomeScreen').classList.remove('hidden');
+    document.getElementById('welcomeHeader').classList.remove('hidden');
     document.getElementById('fileInput').value = '';
     currentImage = null;
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -337,6 +575,5 @@ function readFileAsBase64(file) {
 
   detector.loadModel();
 </script>
-    
   </body>
 </html>
