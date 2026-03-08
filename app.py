@@ -101,7 +101,7 @@ def predict():
         # Kelas 0 = cancerous → prediction RENDAH = cancer
         # Kelas 1 = non cancerous → prediction TINGGI = normal
 
-        prob_cancer = 0.51 - prediction        # ✅ dibalik
+        prob_cancer = 0.61 - prediction        # ✅ dibalik
         prob_non_cancer = prediction        # ✅ dibalik
 
         if prob_cancer >= 0.6:
