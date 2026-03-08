@@ -444,16 +444,7 @@
     if (!detector.modelLoaded) await detector.loadModel();
 
     const result = await detector.predict(currentImage);
-
-    // Apply clinical risk adjustment — HANYA kurangi jika hasil = Non-Kanker
     const adjustedResult = { ...result };
-    adjustedResult.usia = usia;
-    adjustedResult.kelamin = kelamin;
-    adjustedResult.risks = risks;
-      }
-    }
-    adjustedResult.riskNotes = riskNotes;
-    adjustedResult.riskBoost = riskBoost;
     adjustedResult.usia = usia;
     adjustedResult.kelamin = kelamin;
     adjustedResult.risks = risks;
