@@ -270,7 +270,7 @@
                 <span class="font-bold">Probabilitas:</span>
                 <span id="statusText" class="font-bold"></span>
               </p>
-              <p class="text-md">
+              <p class="hidden text-md">
                 <span class="font-base">Persentase:</span>
                 <span id="confidenceText" class="font-base"></span>
               </p>
@@ -278,7 +278,7 @@
           </div>
 
           <!-- Risk factor contribution note -->
-          <div id="riskAdjustmentNote" class="hidden bg-rose-50 border border-rose-200 rounded-xl px-4 py-3 mb-4 text-sm text-red-800 mt-3"></div>
+          <!-- <div id="riskAdjustmentNote" class="hidden bg-rose-50 border border-rose-200 rounded-xl px-4 py-3 mb-4 text-sm text-red-800 mt-3"></div> -->
 
           <div class="bg-none rounded-xl border-none mb-4">
             <p id="recommendationText" class="text-gray-900 leading-normal"></p>
@@ -446,16 +446,10 @@
     const result = await detector.predict(currentImage);
 
     // Apply clinical risk adjustment — HANYA kurangi jika hasil = Non-Kanker
-    const { score: riskBoost, notes: riskNotes } = computeRiskAdjustment(usia, kelamin, risks);
     const adjustedResult = { ...result };
-    const rawConfidence = result.confidence;
-    adjustedResult.rawConfidence = rawConfidence;
-    adjustedResult.diagnosisFlipped = false;
-    if (!result.isCancer && riskBoost > 0) {
-      adjustedResult.confidence = Math.max(rawConfidence - riskBoost, 0.01);
-      if (adjustedResult.confidence < 0.10) {
-        adjustedResult.isCancer = true;
-        adjustedResult.diagnosisFlipped = true;
+    adjustedResult.usia = usia;
+    adjustedResult.kelamin = kelamin;
+    adjustedResult.risks = risks;
       }
     }
     adjustedResult.riskNotes = riskNotes;
@@ -467,64 +461,7 @@
     displayResults(adjustedResult);
   }
 
-  function displayResults(result) {
-    const percentage = (result.confidence * 100).toFixed(2);
-    const rawPercentage = result.rawConfidence ? (result.rawConfidence * 100).toFixed(2) : null;
-    const isCancer = result.isCancer;
-
-    document.getElementById('processingScreen').classList.add('hidden');
-    document.getElementById('resultScreen').classList.remove('hidden');
-    document.getElementById('resultImage').src = currentImage;
-
-    const resultCard     = document.getElementById('resultCard');
-    const statusText     = document.getElementById('statusText');
-    const confidenceText = document.getElementById('confidenceText');
-    const recommendationText = document.getElementById('recommendationText');
-
-    if (isCancer) {
-      resultCard.className = 'relative z-10 rounded-2xl px-6 py-6 mb-4 bg-red-600 text-white';
-      statusText.textContent = 'KANKER MULUT';
-    } else {
-      resultCard.className = 'relative z-10 rounded-2xl px-6 py-6 mb-4 bg-green-700 text-white';
-      statusText.textContent = 'NON KANKER MULUT';
-    }
-
-if (rawPercentage && result.riskBoost > 0) {
-  confidenceText.innerHTML = `<span class="line-through opacity-60">${rawPercentage}%</span> → <strong>${percentage}%</strong> (${getConfidenceLevel(result.confidence)})`;
-} else {
-  confidenceText.textContent = `${percentage}% (${getConfidenceLevel(result.confidence)})`;
-}
-    recommendationText.textContent = result.recommendation;
-
-    // Patient badges
-    const badgeEl = document.getElementById('resultPatientBadge');
-    badgeEl.innerHTML = '';
-    if (result.usia > 0) badgeEl.innerHTML += `<span class="bg-sky-100 text-sky-700 text-sm font-semibold px-3 py-1 rounded-full">Usia: ${result.usia} thn</span>`;
-    if (result.kelamin) badgeEl.innerHTML += `<span class="bg-purple-100 text-purple-700 text-sm font-semibold px-3 py-1 rounded-full">${result.kelamin}</span>`;
-    if (result.risks && result.risks.length > 0) {
-      result.risks.forEach(r => {
-        badgeEl.innerHTML += `<span class="bg-orange-100 text-orange-700 text-sm font-semibold px-3 py-1 rounded-full">${r}</span>`;
-      });
-    }
-
-  const riskNoteEl = document.getElementById('riskAdjustmentNote');
-if (result.riskNotes && result.riskNotes.length > 0 && result.riskBoost > 0) {
-  riskNoteEl.classList.remove('hidden');
-  const deductPct = (result.riskBoost * 100).toFixed(0);
-
-  if (result.diagnosisFlipped) {
-    riskNoteEl.className = 'bg-red-50 border border-red-200 rounded-xl px-4 py-3 mb-4 text-sm text-red-900 mt-3';
-    riskNoteEl.innerHTML = `⚠️ <strong>Diagnosis direvisi menjadi KANKER:</strong> Model AI awalnya mendeteksi <em>Non-Kanker</em> (${rawPercentage}%), namun setelah dikurangi bobot faktor risiko klinis (−${deductPct}%) berdasarkan ${result.riskNotes.join(', ')}, probabilitas turun menjadi <strong>${percentage}%</strong> — di bawah ambang batas 50%, sehingga diklasifikasikan ulang sebagai <strong>Kanker Mulut</strong>. Segera rujuk ke Spesialis Penyakit Mulut.`;
-  } else {
-    riskNoteEl.className = 'bg-orange-50 border border-orange-200 rounded-xl px-4 py-3 mb-4 text-sm text-orange-800 mt-3';
-    riskNoteEl.innerHTML = `📊 <strong>Penyesuaian risiko klinis (−${deductPct}%):</strong> Hasil Non-Kanker dari model AI adalah <strong>${rawPercentage}%</strong>, dikurangi bobot faktor risiko dari ${result.riskNotes.join(', ')}, menghasilkan probabilitas akhir <strong>${percentage}%</strong>.`;
-  }
-} else {
-  riskNoteEl.classList.add('hidden');
-}
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }  // ← kurung tutup displayResults — ini yang hilang
-
+  
   function getConfidenceLevel(confidence) {
     if (confidence >= 0.8) return 'Tinggi';
     if (confidence >= 0.6) return 'Sedang';
