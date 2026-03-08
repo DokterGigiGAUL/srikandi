@@ -469,6 +469,7 @@
 
   function displayResults(result) {
     const percentage = (result.confidence * 100).toFixed(2);
+    const rawPercentage = result.rawConfidence ? (result.rawConfidence * 100).toFixed(2) : null;
     const isCancer = result.isCancer;
 
     document.getElementById('processingScreen').classList.add('hidden');
@@ -510,7 +511,6 @@ if (rawPercentage && result.riskBoost > 0) {
 if (result.riskNotes && result.riskNotes.length > 0 && result.riskBoost > 0) {
   riskNoteEl.classList.remove('hidden');
   const deductPct = (result.riskBoost * 100).toFixed(0);
-  const rawPercentage = result.rawConfidence ? (result.rawConfidence * 100).toFixed(2) : null;
 
   if (result.diagnosisFlipped) {
     riskNoteEl.className = 'bg-red-50 border border-red-200 rounded-xl px-4 py-3 mb-4 text-sm text-red-900 mt-3';
@@ -522,7 +522,9 @@ if (result.riskNotes && result.riskNotes.length > 0 && result.riskBoost > 0) {
 } else {
   riskNoteEl.classList.add('hidden');
 }
-    
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }  // ← kurung tutup displayResults — ini yang hilang
+
   function getConfidenceLevel(confidence) {
     if (confidence >= 0.8) return 'Tinggi';
     if (confidence >= 0.6) return 'Sedang';
@@ -567,7 +569,7 @@ if (result.riskNotes && result.riskNotes.length > 0 && result.riskBoost > 0) {
     document.getElementById('processingScreen').classList.add('hidden');
     document.getElementById('previewScreen').classList.add('hidden');
     document.getElementById('welcomeScreen').classList.remove('hidden');
-    document.getElementById('welcomeHeader').classList.remove('hidden');
+    //document.getElementById('welcomeHeader').classList.remove('hidden');
     document.getElementById('fileInput').value = '';
     currentImage = null;
     window.scrollTo({ top: 0, behavior: 'smooth' });
