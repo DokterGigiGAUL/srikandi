@@ -104,12 +104,12 @@
                     <path d="M11 11h2v6h-2v-6z" fill="white" />
                   </svg>
                 </span>
-                <p class="font-semibold text-gray-950 leading-tight">PETUNJUK PENGGUNAAN:</p>
+                <p class="font-bold text-gray-950 leading-tight">PETUNJUK PENGGUNAAN:</p>
               </div>
               <ol class="text-normal text-gray-700 my-2 pb-0 space-y-1 leading-tight list-decimal px-6">
-                <li class="pb-1">Klik tombol 📷 Ambil/ Upload Foto untuk mengunggah foto lesi/ kondisi intra oral</li>
+                <li class="pb-1">Klik tombol 📷 <b>Ambil/ Upload Foto</b> untuk mengunggah foto lesi/ kondisi intra oral</li>
                 <li class="pb-1">Lengkapi informasi pasien (usia, jenis kelamin, faktor risiko)</li>
-                <li class="pb-1">Klik 🔍 Mulai Analisis AI</li>
+                <li class="pb-1">Klik 🔍 <b>Mulai Analisis AI</b></li>
                 <li class="pb-1">Dapatkan probabilitas [dan persentase] hasil deteksi</li>
               </ol>
             </div>
@@ -226,7 +226,7 @@
             <img id="imagePreview" class="result-image" alt="Preview" />
           </div>
           <!-- Patient data summary during processing -->
-          <div id="processingPatientSummary" class="bg-sky-50 border border-sky-100 rounded-xl px-4 py-3 mb-4 text-sm text-sky-800"></div>
+          <div id="processingPatientSummary" class="bg-sky-50 border border-sky-200 rounded-xl px-4 py-3 mb-4 text-sm text-sky-800"></div>
           <div class="space-y-2">
             <button class="w-auto mx-auto flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-gray-500 hover:bg-gray-600 text-white">
               <svg class="animate-spin h-4 w-4 text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -278,7 +278,7 @@
           </div>
 
           <!-- Risk factor contribution note -->
-          <div id="riskAdjustmentNote" class="hidden bg-orange-50 border border-orange-200 rounded-xl px-4 py-3 mb-4 text-sm text-orange-800 mt-3"></div>
+          <div id="riskAdjustmentNote" class="hidden bg-rose-50 border border-rose-200 rounded-xl px-4 py-3 mb-4 text-sm text-red-800 mt-3"></div>
 
           <div class="bg-none rounded-xl border-none mb-4">
             <p id="recommendationText" class="text-gray-900 leading-normal"></p>
@@ -439,7 +439,7 @@
     if (kelamin) summaryParts.push(`Kelamin: ${kelamin}`);
     if (risks.length > 0) summaryParts.push(`Risiko: ${risks.join(', ')}`);
     document.getElementById('processingPatientSummary').textContent =
-      summaryParts.length > 0 ? '🔍 Menganalisis dengan data: ' + summaryParts.join(' · ') : '🔍 Menganalisis gambar lesi...';
+      summaryParts.length > 0 ? '🔍 Memulai analisis. Data tambahan: ' + summaryParts.join(' · ') : '🔍 Menganalisis gambar lesi...';
 
     if (!detector.modelLoaded) await detector.loadModel();
 
@@ -491,11 +491,11 @@
     // Patient badges
     const badgeEl = document.getElementById('resultPatientBadge');
     badgeEl.innerHTML = '';
-    if (result.usia > 0) badgeEl.innerHTML += `<span class="bg-sky-100 text-sky-700 text-xs font-semibold px-3 py-1 rounded-full">Usia: ${result.usia} thn</span>`;
-    if (result.kelamin) badgeEl.innerHTML += `<span class="bg-purple-100 text-purple-700 text-xs font-semibold px-3 py-1 rounded-full">${result.kelamin}</span>`;
+    if (result.usia > 0) badgeEl.innerHTML += `<span class="bg-sky-100 text-sky-700 text-sm font-semibold px-3 py-1 rounded-full">Usia: ${result.usia} thn</span>`;
+    if (result.kelamin) badgeEl.innerHTML += `<span class="bg-purple-100 text-purple-700 text-sm font-semibold px-3 py-1 rounded-full">${result.kelamin}</span>`;
     if (result.risks && result.risks.length > 0) {
       result.risks.forEach(r => {
-        badgeEl.innerHTML += `<span class="bg-orange-100 text-orange-700 text-xs font-semibold px-3 py-1 rounded-full">${r}</span>`;
+        badgeEl.innerHTML += `<span class="bg-orange-100 text-orange-700 text-sm font-semibold px-3 py-1 rounded-full">${r}</span>`;
       });
     }
 
@@ -505,11 +505,11 @@
       riskNoteEl.classList.remove('hidden');
       const boostPct = (result.riskBoost * 100).toFixed(0);
       if (result.riskWarning) {
-        riskNoteEl.className = 'bg-red-50 border border-red-200 rounded-xl px-4 py-3 mb-4 text-sm text-red-800 mt-3';
+        riskNoteEl.className = 'bg-orange-50 border border-orange-200 rounded-xl px-4 py-3 mb-4 text-sm text-orange-800 mt-3';
         riskNoteEl.innerHTML = `⚠️ <strong>Perhatian klinis:</strong> Meskipun analisis gambar menunjukkan Non-Kanker, faktor risiko pasien (${result.riskNotes.join(', ')}) meningkatkan probabilitas klinis secara signifikan. Disarankan pemeriksaan biopsi dan rujukan ke Spesialis Penyakit Mulut.`;
       } else if (result.riskBoost > 0) {
-        riskNoteEl.className = 'bg-orange-50 border border-orange-200 rounded-xl px-4 py-3 mb-4 text-sm text-orange-800 mt-3';
-        riskNoteEl.innerHTML = `📊 <strong>Penyesuaian risiko klinis (+${boostPct}%):</strong> Faktor ${result.riskNotes.join(', ')} meningkatkan probabilitas hasil analisis.`;
+        riskNoteEl.className = 'bg-rose-50 border border-rose-200 rounded-xl px-4 py-3 mb-4 text-sm text-red-800 mt-3';
+        riskNoteEl.innerHTML = `📊 <strong>Penyesuaian risiko (+${boostPct}%):</strong> Faktor ${result.riskNotes.join(', ')} meningkatkan probabilitas hasil analisis.`;
       } else {
         riskNoteEl.classList.add('hidden');
       }
