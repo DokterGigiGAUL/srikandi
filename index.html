@@ -453,7 +453,7 @@
     adjustedResult.diagnosisFlipped = false;
     if (!result.isCancer && riskBoost > 0) {
       adjustedResult.confidence = Math.max(rawConfidence - riskBoost, 0.01);
-      if (adjustedResult.confidence < 0.50) {
+      if (adjustedResult.confidence < 0.10) {
         adjustedResult.isCancer = true;
         adjustedResult.diagnosisFlipped = true;
       }
