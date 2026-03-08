@@ -445,21 +445,24 @@
 
     const result = await detector.predict(currentImage);
 
-    // Apply clinical risk adjustment
+    // Apply clinical risk adjustment — HANYA kurangi jika hasil = Non-Kanker
     const { score: riskBoost, notes: riskNotes } = computeRiskAdjustment(usia, kelamin, risks);
     const adjustedResult = { ...result };
-
-    if (result.isCancer && riskBoost > 0) {
-      adjustedResult.confidence = Math.min(result.confidence + riskBoost * result.confidence, 0.99);
-    } else if (!result.isCancer && riskBoost > 0.15) {
-      adjustedResult.riskWarning = true;
+    const rawConfidence = result.confidence;
+    adjustedResult.rawConfidence = rawConfidence;
+    adjustedResult.diagnosisFlipped = false;
+    if (!result.isCancer && riskBoost > 0) {
+      adjustedResult.confidence = Math.max(rawConfidence - riskBoost, 0.01);
+      if (adjustedResult.confidence < 0.50) {
+        adjustedResult.isCancer = true;
+        adjustedResult.diagnosisFlipped = true;
+      }
     }
     adjustedResult.riskNotes = riskNotes;
     adjustedResult.riskBoost = riskBoost;
     adjustedResult.usia = usia;
     adjustedResult.kelamin = kelamin;
     adjustedResult.risks = risks;
-
     await uploadToCloud(currentImage, adjustedResult, usia, kelamin, risks);
     displayResults(adjustedResult);
   }
@@ -485,7 +488,11 @@
       statusText.textContent = 'NON KANKER MULUT';
     }
 
-    confidenceText.textContent = `${percentage}% (${getConfidenceLevel(result.confidence)})`;
+if (rawPercentage && result.riskBoost > 0) {
+  confidenceText.innerHTML = `<span class="line-through opacity-60">${rawPercentage}%</span> → <strong>${percentage}%</strong> (${getConfidenceLevel(result.confidence)})`;
+} else {
+  confidenceText.textContent = `${percentage}% (${getConfidenceLevel(result.confidence)})`;
+}
     recommendationText.textContent = result.recommendation;
 
     // Patient badges
@@ -499,27 +506,23 @@
       });
     }
 
-    // Risk adjustment note
-    const riskNoteEl = document.getElementById('riskAdjustmentNote');
-    if (result.riskNotes && result.riskNotes.length > 0) {
-      riskNoteEl.classList.remove('hidden');
-      const boostPct = (result.riskBoost * 100).toFixed(0);
-      if (result.riskWarning) {
-        riskNoteEl.className = 'bg-orange-50 border border-orange-200 rounded-xl px-4 py-3 mb-4 text-sm text-orange-800 mt-3';
-        riskNoteEl.innerHTML = `⚠️ <strong>Perhatian klinis:</strong> Meskipun analisis gambar menunjukkan Non-Kanker, faktor risiko pasien (${result.riskNotes.join(', ')}) meningkatkan probabilitas klinis secara signifikan. Disarankan pemeriksaan biopsi dan rujukan ke Spesialis Penyakit Mulut.`;
-      } else if (result.riskBoost > 0) {
-        riskNoteEl.className = 'bg-rose-50 border border-rose-200 rounded-xl px-4 py-3 mb-4 text-sm text-red-800 mt-3';
-        riskNoteEl.innerHTML = `📊 <strong>Penyesuaian risiko (+${boostPct}%):</strong> Faktor ${result.riskNotes.join(', ')} meningkatkan probabilitas hasil analisis.`;
-      } else {
-        riskNoteEl.classList.add('hidden');
-      }
-    } else {
-      riskNoteEl.classList.add('hidden');
-    }
+  const riskNoteEl = document.getElementById('riskAdjustmentNote');
+if (result.riskNotes && result.riskNotes.length > 0 && result.riskBoost > 0) {
+  riskNoteEl.classList.remove('hidden');
+  const deductPct = (result.riskBoost * 100).toFixed(0);
+  const rawPercentage = result.rawConfidence ? (result.rawConfidence * 100).toFixed(2) : null;
 
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  if (result.diagnosisFlipped) {
+    riskNoteEl.className = 'bg-red-50 border border-red-200 rounded-xl px-4 py-3 mb-4 text-sm text-red-900 mt-3';
+    riskNoteEl.innerHTML = `⚠️ <strong>Diagnosis direvisi menjadi KANKER:</strong> Model AI awalnya mendeteksi <em>Non-Kanker</em> (${rawPercentage}%), namun setelah dikurangi bobot faktor risiko klinis (−${deductPct}%) berdasarkan ${result.riskNotes.join(', ')}, probabilitas turun menjadi <strong>${percentage}%</strong> — di bawah ambang batas 50%, sehingga diklasifikasikan ulang sebagai <strong>Kanker Mulut</strong>. Segera rujuk ke Spesialis Penyakit Mulut.`;
+  } else {
+    riskNoteEl.className = 'bg-orange-50 border border-orange-200 rounded-xl px-4 py-3 mb-4 text-sm text-orange-800 mt-3';
+    riskNoteEl.innerHTML = `📊 <strong>Penyesuaian risiko klinis (−${deductPct}%):</strong> Hasil Non-Kanker dari model AI adalah <strong>${rawPercentage}%</strong>, dikurangi bobot faktor risiko dari ${result.riskNotes.join(', ')}, menghasilkan probabilitas akhir <strong>${percentage}%</strong>.`;
   }
-
+} else {
+  riskNoteEl.classList.add('hidden');
+}
+    
   function getConfidenceLevel(confidence) {
     if (confidence >= 0.8) return 'Tinggi';
     if (confidence >= 0.6) return 'Sedang';
