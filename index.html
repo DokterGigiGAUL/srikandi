@@ -242,15 +242,13 @@
                 <button type="button" class="risk-chip" data-risk="Sirih/Tembakau kunyah" onclick="toggleRisk(this)">🍃 Mengunyah Sirih/ Tembakau</button>
               </div>
             </div>
-          </div>-->
+          </div>
 
-          <!-- Start Analysis Button -->
           <button onclick="startAnalysis()"
             class="w-auto mx-auto pulse-ring-pill transition-transform active:scale-95 bg-sky-600 hover:bg-sky-500 text-white font-bold py-5 px-6 rounded-2xl flex items-center justify-center gap-3 mb-6 text-lg">
             🔍 <span>Mulai Analisis AI</span>
           </button>
 
-          <!-- Disclaimer -->
           <div class="bg-yellow-100 border border-yellow-100 rounded-xl md:rounded-2xl p-4 mb-6">
             <div class="flex items-start gap-2">
               <span>
@@ -267,7 +265,7 @@
               <li>Hanya untuk digunakan oleh tenaga medis profesional yang kompeten</li>
             </ul>
           </div>
-        </div>
+        </div>-->
 
         <!-- Processing Screen -->
         <div id="processingScreen" class="hidden">
@@ -464,7 +462,6 @@
   async function startAnalysis() {
     
     // Show processing screen
-    document.getElementById('previewScreen').classList.add('hidden');
     document.getElementById('processingScreen').classList.remove('hidden');
     document.getElementById('imagePreview').src = currentImage;
 
@@ -562,7 +559,6 @@
   function resetApp() {
     document.getElementById('resultScreen').classList.add('hidden');
     document.getElementById('processingScreen').classList.add('hidden');
-    document.getElementById('previewScreen').classList.add('hidden');
     document.getElementById('welcomeScreen').classList.remove('hidden');
     //document.getElementById('welcomeHeader').classList.remove('hidden');
     document.getElementById('fileInput').value = '';
