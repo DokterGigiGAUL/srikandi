@@ -169,9 +169,9 @@ body {
         /* 2. Daftarkan Font Kustom Anda di Sini */
   @font-face {
   font-family: 'SFPro';
-  src: url('fonts/SF-Pro-Text-Regular.ttf') format('truetype');
-       url('fonts/SF-Pro-Text-Regular.otf');
-       url('fonts/SF-Pro-Text-Regular.woff2');
+  src: url('fonts/SF-Pro-Text-Regular.ttf') format('truetype'),
+       url('fonts/SF-Pro-Text-Regular.otf'),
+       url('fonts/SF-Pro-Text-Regular.woff2') format('woff2');
     font-weight: 400;
   font-style: normal;
   letter-spacing:-0.05em;
@@ -182,7 +182,7 @@ body {
   src: url('fonts/SF-Pro-Text-Medium.otf') format('truetype');
   font-weight: 500;
   font-style: normal;
-  letter-spacing:-0.05em;
+font-display: swap;
 
 }
   @font-face {
@@ -190,37 +190,37 @@ body {
   src: url('fonts/SF-Pro-Text-Semibold.otf') format('truetype');
   font-weight: 600;
   font-style: normal;
-  letter-spacing:-0.05em;
+font-display: swap;
 
 }
   @font-face {
   font-family: 'SFPro';
-  src: url('fonts/SF-Pro-Text-Bold.ttf') format('truetype');
-       url('fonts/SF-Pro-Text-Bold.otf');
-       url('fonts/SF-Pro-Text-Bold.woff2');
+  src: url('fonts/SF-Pro-Text-Bold.ttf') format('truetype'),
+       url('fonts/SF-Pro-Text-Bold.otf'),
+       url('fonts/SF-Pro-Text-Bold.woff2') format('woff2');
     font-weight: 700;
   font-style: normal;
-  letter-spacing:-0.05em;
+font-display: swap;
 
 }
   @font-face {
   font-family: 'SFPro';
-  src: url('fonts/SF-Pro-Text-Heavy.ttf') format('truetype');
-       url('fonts/SF-Pro-Text-Heavy.otf');
-       url('fonts/SF-Pro-Text-Heavy.woff2');
+  src: url('fonts/SF-Pro-Text-Heavy.ttf') format('truetype'),
+       url('fonts/SF-Pro-Text-Heavy.otf'),
+       url('fonts/SF-Pro-Text-Heavy.woff2') format('woff2');
   font-weight: 800;
   font-style: normal;
-  letter-spacing:-0.05em;
+font-display: swap;
 
 }
   @font-face {
   font-family: 'SFPro';
-  src: url('fonts/SF-Pro-Text-Black.ttf') format('truetype');
-       url('fonts/SF-Pro-Text-Black.otf');
-       url('fonts/SF-Pro-Text-Black.woff2');
+  src: url('fonts/SF-Pro-Text-Black.ttf') format('truetype'),
+       url('fonts/SF-Pro-Text-Black.otf'),
+       url('fonts/SF-Pro-Text-Black.woff2') format('woff2');
     font-weight: 900;
   font-style: normal;
-  letter-spacing:-0.05em;
+font-display: swap;
 
 }
         /* Haluskan tampilan font di browser */
