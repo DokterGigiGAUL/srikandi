@@ -63,7 +63,37 @@
 
   <body class="bg-gray-200">
     <input type="file" id="fileInput" accept="image/*" class="hidden" />
+      <nav class="fixed top-0 inset-x-0 bg-white flex items-center justify-between px-6 py-3 max-w-7xl mx-auto z-50">
+        <div class="flex items-center gap-2">
+            <div class="w-8 h-auto rounded-lg mx-auto justify-center">
+          <a href="https://doktergigigaul.github.io/srikandi">
+            <img src="https://doktergigigaul.github.io/ocre/Logo-gigital-2.png" />
+          </a>
+        </div>
+            <span class="font-bold text-xl text-blue-900 tracking-tight">Srikandi</span>
+        </div>
 
+        <div class="hidden md:flex items-center gap-10 text-sm font-medium text-gray-500">
+            <a href="#" class="hover:text-blue-600 transition">How it Works</a>
+            <a href="#" class="hover:text-blue-600 transition">Why Srikandi</a>
+        </div>
+
+        <button id="menu-btn" class="md:hidden text-gray-600 focus:outline-none p-2">
+            <svg id="burger-icon" class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+            </svg>
+            <svg id="close-icon" class="w-7 h-7 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </button>
+
+        <div id="mobile-menu" class="absolute top-full left-0 w-full bg-white shadow-2xl border-t border-gray-100 hidden flex-col p-8 gap-6 md:hidden">
+            <a href="#" class="text-lg font-semibold text-gray-800">How it Works</a>
+            <a href="#" class="text-lg font-semibold text-gray-800">Why Srikandi</a>
+            <button class="bg-blue-600 text-white px-5 py-4 rounded-xl font-bold">Start Free Scan</button>
+        </div>
+      </nav>
+    
     <div class="max-w-lg md:w-xl mx-auto min-h-screen bg-[linear-gradient(to_bottom,rgba(255,255,255,0.95),rgba(255,255,255,0.98)),url('https://live.staticflickr.com/65535/55111931235_97bf050cce_c.jpg')] bg-local bg-cover bg-center">
 
       <!-- Header -->
@@ -80,7 +110,7 @@
 
         <!-- Welcome Header -->
         <div id="welcomeHeader">
-          <p class="w-fit mx-auto text-center text-sm text-gray-500 leading-loose tracking-[0.25em] uppercase">SKRINING BERBASIS AI</p>
+          <p class="w-fit mx-auto text-center text-xs text-gray-500 leading-loose tracking-[0.25em] uppercase">SKRINING BERBASIS AI</p>
           <p class="w-fit mx-auto text-center text-3xl md:text-4xl font-extrabold text-gray-900 mt-0 mb-4  leading-[1.25] md:leading-[1.25]">Deteksi Dini.<br/><span class="text-sky-600">Menyelamatkan Nyawa.</span></p>
         </div>
 
@@ -88,7 +118,7 @@
         <div id="welcomeScreen">
           <div class="mb-6">
             <div class="relative w-full">
-              <img src="https://framerusercontent.com/images/PX4Hi9dXBjfyJxSJrB0CMBofN4.jpg" alt="Foto 1" class=" w-full aspect-[4/3] object-cover rounded-2xl mb-4">
+              <img src="https://framerusercontent.com/images/PX4Hi9dXBjfyJxSJrB0CMBofN4.jpg" alt="Foto 1" class=" w-full aspect-[4/3] object-cover rounded-2xl my-6">
               <img src="https://i.ibb.co.com/bgcmXhw4/Logo-gigital-putih.png" class="absolute w-16 z100 top-3 right-0 " />
                 <p class="w-fit mx-auto text-center text-md md:text-lg text-gray-700 leading-snug">
                 Srikandi menggunakan bot berbasis AI untuk prediksi probabilitas kanker mulut instan dari foto. Cepat, privat, dan dapat diakses oleh semua orang.
