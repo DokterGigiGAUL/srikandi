@@ -221,5 +221,3 @@ body {
             -moz-osx-font-smoothing: grayscale;
             font-family: 'SFPro', sans-serif;
         }
-        
-        #mobile-menu { transition: opacity 0.2s ease-in-out; }
