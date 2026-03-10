@@ -9,17 +9,17 @@
         /* Menggunakan System Font Stack agar memanggil SF Pro di Apple Devices */
         /* 2. Daftarkan Font Kustom Anda di Sini */
         @font-face {
-            font-family: 'MyCustomFont';
+            font-family: 'SFPro';
             /* Ganti 'fonts/nama-file-font-anda.ttf' dengan lokasi file font asli Anda */
-            src: url('srikandi/fonts/SF-Pro.ttf) format('truetype');
+            src: url('../srikandi/fonts/SF-Pro.ttf) format('truetype');
             font-weight: normal;
             font-style: normal;
             font-display: swap;
         }
 
         @font-face {
-            font-family: 'MyCustomFont';
-            src: url('srikandi/fonts/SF-Pro-Text-Regular.otf') format('truetype');
+            font-family: 'SFPro';
+            src: url('../srikandi/fonts/SF-Pro-Text-Regular.otf') format('truetype');
             font-weight: bold;
             font-style: normal;
             font-display: swap;
@@ -33,12 +33,12 @@
         #mobile-menu { transition: opacity 0.2s ease-in-out; }
     </style>
     <script>
-        /* 3. Beritahu Tailwind untuk menggunakan nama 'MyCustomFont' sebagai default */
+        /* 3. Beritahu Tailwind untuk menggunakan nama 'SFPro' sebagai default */
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['MyCustomFont', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+                        sans: ['SFPro', 'ui-sans-serif', 'system-ui', 'sans-serif'],
                     }
                 }
             }
