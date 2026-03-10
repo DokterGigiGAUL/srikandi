@@ -7,9 +7,9 @@
     <link rel="icon" type="image/x-icon" href="/Logo-gigital-small.png" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="css/style.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <!--<link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <!--<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />-->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />-->
     <style>
       /* Menggunakan System Font Stack agar memanggil SF Pro di Apple Devices */
         /* 2. Daftarkan Font Kustom Anda di Sini */
@@ -68,7 +68,7 @@
             font-family: 'SFPro', sans-serif;
         }
         
-        #mobile-menu { transition: opacity 0.2s ease-in-out; }
+      /*  #mobile-menu { transition: opacity 0.2s ease-in-out; } */
     </style>
   </head>
 
@@ -147,7 +147,7 @@
     <div
       class="max-w-lg lg:max-w-2xl mx-auto min-h-screen bg-[linear-gradient(to_bottom,rgba(255,255,255,0.95),rgba(255,255,255,0.98)),url('https://live.staticflickr.com/65535/55111931235_97bf050cce_c.jpg')] bg-local bg-cover bg-center"
     >
-      <!-- Header -->
+      <!-- Header
       <div
         class="hidden flex items-center mx-auto justify-center bg-none mx-6 py-3 border-b border-gray-300"
       >
@@ -158,7 +158,7 @@
             />
           </a>
         </div>
-      </div>
+      </div>  -->
 
       <!-- Main Content -->
       <div id="mainContent" class="pb-6 px-6 pt-4">
@@ -490,45 +490,10 @@
     
       const BACKEND_API_URL = 'https://script.google.com/macros/s/AKfycbzUWjjMNL4ZbTlSFz9lRBe44qXtsXtLaZpab5PMvwQVpCo9SXiB75LnpGVnAtMMnYPenA/exec';
       const MAX_FILE_SIZE_MB = 10;
-      const ANTHROPIC_API_URL = 'https://api.anthropic.com/v1/messages';
-
-      // ── Risk chip toggle ──────────────────────────────────────────────
-      function toggleRisk(el) {
-        el.classList.toggle('active');
-      }
-
-      function getSelectedRisks() {
-        const chips = document.querySelectorAll('#riskChipsContainer .risk-chip.active');
-        return Array.from(chips).map(c => c.dataset.risk);
-      }
 
       // ── Upload click: validate form first ───────────────────────────
       function handleUploadClick() {
         document.getElementById('fileInput').click();
-      }
-
-      // ── Compute clinical risk adjustment ────────────────────────────
-      function computeRiskAdjustment(usia, kelamin, risks) {
-        let score = 0;
-        const notes = [];
-
-        // Age factor
-        if (usia >= 60) { score += 0.12; notes.push(`usia ${usia} tahun (risiko tinggi ≥60)`); }
-        else if (usia >= 40) { score += 0.06; notes.push(`usia ${usia} tahun (risiko sedang 40–59)`); }
-        else if (usia > 0) { notes.push(`usia ${usia} tahun (risiko rendah <40)`); }
-
-        // Gender factor (men slightly higher risk in literature)
-        if (kelamin === 'Laki-laki') { score += 0.04; notes.push('jenis kelamin laki-laki'); }
-
-        // Risk factors
-        if (risks.includes('Merokok')) { score += 0.10; notes.push('merokok'); }
-        if (risks.includes('Alkohol')) { score += 0.08; notes.push('konsumsi alkohol'); }
-        if (risks.includes('Sirih/Tembakau kunyah')) { score += 0.10; notes.push('penggunaan sirih/tembakau kunyah'); }
-        if (risks.includes('HPV')) { score += 0.07; notes.push('infeksi HPV'); }
-        if (risks.includes('Riwayat kanker mulut keluarga')) { score += 0.06; notes.push('riwayat keluarga'); }
-        if (risks.includes('Paparan sinar matahari berlebih')) { score += 0.04; notes.push('paparan UV berlebih'); }
-
-        return { score: Math.min(score, 0.40), notes };
       }
 
       // ── Main detector ─────────────────────────────────────────────────
@@ -580,11 +545,6 @@
         await startAnalysis();
       }
 
-      function changePhoto() {
-        document.getElementById('fileInput').value = '';
-        document.getElementById('fileInput').click();
-      }
-
       async function startAnalysis() {
         document.getElementById('processingScreen').classList.remove('hidden');
         document.getElementById('imagePreview').src = currentImage;
@@ -620,16 +580,6 @@
 
         confidenceText.textContent = `${percentage}% (${getConfidenceLevel(result.confidence)})`;
         recommendationText.textContent = result.recommendation;
-
-        const badgeEl = document.getElementById('resultPatientBadge');
-        badgeEl.innerHTML = '';
-        if (result.usia > 0) badgeEl.innerHTML += `<span class="bg-sky-100 text-sky-700 text-sm font-semibold px-3 py-1 rounded-full">Usia: ${result.usia} thn</span>`;
-        if (result.kelamin) badgeEl.innerHTML += `<span class="bg-purple-100 text-purple-700 text-sm font-semibold px-3 py-1 rounded-full">${result.kelamin}</span>`;
-        if (result.risks && result.risks.length > 0) {
-          result.risks.forEach(r => {
-            badgeEl.innerHTML += `<span class="bg-orange-100 text-orange-700 text-sm font-semibold px-3 py-1 rounded-full">${r}</span>`;
-          });
-        }
 
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
