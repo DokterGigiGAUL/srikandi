@@ -134,7 +134,7 @@
           <p class="w-fit mx-auto text-center text-xs text-gray-500 leading-loose tracking-[0.25em] uppercase mb-1">
             SKRINING BERBASIS AI
           </p>
-          <p class="w-fit mx-auto text-center text-4xl md:text-5xl font-extrabold text-gray-900 mt-0 mb-4 tracking-tight leading-[1.15] ">
+          <p class="w-fit mx-auto text-center text-4xl md:text-5xl font-extrabold text-gray-900 mt-0 mb-4 tracking-tight leading-[1.15] md:leading-[1.25] lg:leading-[1.25]">
             Deteksi Dini<br /><span class="text-sky-600">Selamatkan Diri.</span>
           </p>
         </div>
@@ -353,7 +353,7 @@
                 <span class="font-bold">Probabilitas:</span>
                 <span id="statusText" class="font-bold"></span>
               </p>
-              <p class="hidden text-md">
+              <p class=" text-md">
                 <span class="font-base">Persentase:</span>
                 <span id="confidenceText" class="font-base"></span>
               </p>
@@ -481,7 +481,7 @@
           const data = await response.json();
           return {
             probability: data.prediction_value,
-            confidence: data.confidence / 100,
+            confidence: (data.confidence / 100) * 0.80,
             isCancer: data.diagnosis === 'Cancer Detected',
             recommendation: data.recommendation
           };
@@ -551,7 +551,7 @@
       }
       function getConfidenceLevel(confidence) {
         if (confidence >= 0.8) return 'Tinggi';
-        if (confidence >= 0.6) return 'Sedang';
+        if (confidence >= 0.51) return 'Sedang';
         return 'Rendah';
       }
 
