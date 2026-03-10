@@ -7,69 +7,6 @@
     <link rel="icon" type="image/x-icon" href="/Logo-gigital-small.png" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="css/style.css" />
-    <!--<link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />-->
-    <style>
-      /* Menggunakan System Font Stack agar memanggil SF Pro di Apple Devices */
-        /* 2. Daftarkan Font Kustom Anda di Sini */
-  @font-face {
-  font-family: 'SFPro';
-  src: url('fonts/SF-Pro-Text-Regular.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-  letter-spacing:-0.05em;
-}
-
-  @font-face {
-  font-family: 'SFPro';
-  src: url('fonts/SF-Pro-Text-Medium.ttf') format('truetype');
-  font-weight: 500;
-  font-style: normal;
-  letter-spacing:-0.05em;
-
-}
-  @font-face {
-  font-family: 'SFPro';
-  src: url('fonts/SF-Pro-Text-Semibold.ttf') format('truetype');
-  font-weight: 600;
-  font-style: normal;
-  letter-spacing:-0.05em;
-
-}
-  @font-face {
-  font-family: 'SFPro';
-  src: url('fonts/SF-Pro-Text-Bold.ttf') format('truetype');
-  font-weight: 700;
-  font-style: normal;
-  letter-spacing:-0.05em;
-
-}
-  @font-face {
-  font-family: 'SFPro';
-  src: url('fonts/SF-Pro-Text-Heavy.ttf') format('truetype');
-  font-weight: 800;
-  font-style: normal;
-  letter-spacing:-0.05em;
-
-}
-  @font-face {
-  font-family: 'SFPro';
-  src: url('fonts/SF-Pro-Text-Black.ttf') format('truetype');
-  font-weight: 900;
-  font-style: normal;
-  letter-spacing:-0.05em;
-
-}
-        /* Haluskan tampilan font di browser */
-        body {
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            font-family: 'SFPro', sans-serif;
-        }
-        
-      /*  #mobile-menu { transition: opacity 0.2s ease-in-out; } */
-    </style>
   </head>
 
   <body class="bg-gray-200">
@@ -91,33 +28,11 @@
       </div>
 
       <button id="menu-btn" class="md:hidden text-gray-600 p-2 rounded-lg hover:bg-gray-50">
-        <svg
-          id="burger-icon"
-          class="w-6 h-6"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M4 6h16M4 12h16m-7 6h7"
-          ></path>
+        <svg id="burger-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
         </svg>
-        <svg
-          id="close-icon"
-          class="w-7 h-7 hidden"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M6 18L18 6M6 6l12 12"
-          ></path>
+        <svg id="close-icon" class="w-7 h-7 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
         </svg>
       </button>
 
@@ -125,9 +40,6 @@
       	class="absolute top-full left-0 w-full bg-white shadow-2xl border-t border-gray-100 hidden flex-col p-8 gap-6 md:hidden">
         <a href="#" class="text-lg font-semibold text-gray-800">Petunjuk Penggunaan</a>
         <a href="#" class="text-lg font-semibold text-gray-800">Kenapa Srikandi</a>
-        <button class="hidden bg-blue-600 text-white px-5 py-4 rounded-xl font-bold">
-          Start Free Scan
-        </button>
         <button
                 onclick="handleUploadClick()"
                 class="bg-sky-600 text-white px-5 py-4 flex gap-2 justify-center rounded-xl font-bold"
@@ -147,18 +59,6 @@
     <div
       class="max-w-lg lg:max-w-2xl mx-auto min-h-screen bg-[linear-gradient(to_bottom,rgba(255,255,255,0.95),rgba(255,255,255,0.98)),url('https://live.staticflickr.com/65535/55111931235_97bf050cce_c.jpg')] bg-local bg-cover bg-center"
     >
-      <!-- Header
-      <div
-        class="hidden flex items-center mx-auto justify-center bg-none mx-6 py-3 border-b border-gray-300"
-      >
-        <div class="w-8 h-auto rounded-lg mx-auto justify-center">
-          <a href="https://doktergigigaul.github.io/srikandi">
-            <img
-              src="https://doktergigigaul.github.io/ocre/Logo-gigital-2.png"
-            />
-          </a>
-        </div>
-      </div>  -->
 
       <!-- Main Content -->
       <div id="mainContent" class="pb-6 px-6 pt-4">
@@ -200,8 +100,8 @@
               </p>
             </div>
             
-<!-- Upload Button -->
-            <div class="flex flex-col items-center mx-auto">
+          <!-- Upload Button -->
+            <div class="flex flex-col items-center mx-auto mt-6">
               <button
                 onclick="handleUploadClick()"
                 class="pulse-ring-pill transition-transform active:scale-95 justify-center mx-auto z-10 bg-sky-600 hover:bg-sky-500 text-white font-semibold py-4 px-6 rounded-2xl transition-all duration-200 flex items-center justify-center gap-2"
@@ -215,7 +115,7 @@
                 </svg>
                 <span class="text-lg font-bold">Ambil/ Upload Foto</span>
               </button>
-            </div>
+            </div> 
             
             <!-- Instructions -->
             <div
@@ -254,7 +154,7 @@
               </ol>
             </div>
 
-            <!-- Upload Button -->
+            <!-- Upload Button 
             <div class="relative z-10 flex flex-col items-center mx-auto">
               <button
                 onclick="handleUploadClick()"
@@ -269,7 +169,7 @@
                 </svg>
                 <span class="text-lg font-bold">Ambil/ Upload Foto</span>
               </button>
-            </div>
+            </div> -->
 
             <!-- Warning Card -->
             <div
