@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Srikandi - Early Detection Saves Lives</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Menggunakan System Font Stack agar memanggil SF Pro di Apple Devices */
+        /* 2. Daftarkan Font Kustom Anda di Sini */
+        @font-face {
+            font-family: 'MyCustomFont';
+            /* Ganti 'fonts/nama-file-font-anda.ttf' dengan lokasi file font asli Anda */
+            src: url('fonts/SF-Pro.ttf) format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'MyCustomFont';
+            src: url('fonts/SF-Pro-Text-Regular.otf') format('truetype');
+            font-weight: bold;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        /* Haluskan tampilan font di browser */
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        #mobile-menu { transition: opacity 0.2s ease-in-out; }
+    </style>
+    <script>
+        /* 3. Beritahu Tailwind untuk menggunakan nama 'MyCustomFont' sebagai default */
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['MyCustomFont', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-white text-gray-900">
+
+    <nav class="relative flex items-center justify-between px-8 py-6 max-w-7xl mx-auto z-50">
+        <div class="flex items-center gap-2">
+            <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+                <span class="text-white font-bold text-lg">S</span>
+            </div>
+            <span class="font-bold text-xl text-blue-900 tracking-tight">Srikandi</span>
+        </div>
+
+        <div class="hidden md:flex items-center gap-10 text-sm font-medium text-gray-500">
+            <a href="#" class="hover:text-blue-600 transition">How it Works</a>
+            <a href="#" class="hover:text-blue-600 transition">Why Srikandi</a>
+        </div>
+
+        <button id="menu-btn" class="md:hidden text-gray-600 p-2 rounded-lg hover:bg-gray-50">
+            <svg id="burger-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+            </svg>
+            <svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </button>
+
+        <div id="mobile-menu" class="absolute top-full left-0 w-full bg-white shadow-2xl border-t border-gray-100 hidden flex-col p-8 gap-6 md:hidden">
+            <a href="#" class="text-lg font-semibold text-gray-800">How it Works</a>
+            <a href="#" class="text-lg font-semibold text-gray-800">Why Srikandi</a>
+            <button class="bg-blue-600 text-white px-5 py-4 rounded-xl font-bold shadow-lg shadow-blue-100">Start Your Free Scan</button>
+        </div>
+    </nav>
+
+    <header class="text-center mt-16 px-4">
+        <p class="text-blue-600 font-bold text-xs tracking-[0.2em] uppercase mb-4">✦ AI-Powered Screening</p>
+        <h1 class="text-4xl md:text-[64px] font-extrabold text-blue-900 mb-8 tracking-tight leading-tight font-(family-name:MyCustomFont)">
+            Early Detection <span class="text-blue-600">Saves Lives.</span>
+        </h1>
+        <p class="max-w-2xl mx-auto text-gray-500 mb-12 leading-relaxed text-lg">
+            Srikandi uses advanced AI to provide instant oral cancer screenings from a simple photo. 
+            Fast, private, and accessible to everyone.
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4 mb-20">
+            <button class="bg-blue-600 text-white px-10 py-4 rounded-xl font-bold text-lg hover:bg-blue-700 transition shadow-xl shadow-blue-100">
+                Start Your Free Scan →
+            </button>
+            <button class="border border-gray-200 px-10 py-4 rounded-xl font-bold text-lg hover:bg-gray-50 transition text-gray-700">
+                Learn More
+            </button>
+        </div>
+
+        <div class="max-w-4xl mx-auto bg-gray-50 rounded-[2.5rem] border border-gray-100 p-12 shadow-sm relative aspect-video flex flex-col items-center justify-center">
+            <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-md mb-4">
+                <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+            </div>
+            <p class="text-gray-400 font-medium text-sm">Demo Video: How Srikandi Works</p>
+        </div>
+    </header>
+
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const burgerIcon = document.getElementById('burger-icon');
+        const closeIcon = document.getElementById('close-icon');
+
+        menuBtn.addEventListener('click', () => {
+            const isHidden = mobileMenu.classList.contains('hidden');
+            mobileMenu.classList.toggle('hidden', !isHidden);
+            mobileMenu.classList.toggle('flex', isHidden);
+            burgerIcon.classList.toggle('hidden', isHidden);
+            closeIcon.classList.toggle('hidden', !isHidden);
+        });
+    </script>
+</body>
+</html>
